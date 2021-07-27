@@ -6,11 +6,11 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const safePostCssParser = require("postcss-safe-parser");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const preprocess = require("svelte-preprocess");
 
 const path = require("path");
@@ -34,10 +34,10 @@ const postCssLoaderConfig = {
     }
 };
 
-module.exports = {
+const clientConfig = {
     bail: prod,
     context: path.resolve(__dirname, "./src"),
-    devtool: prod ? false : "cheap-module-eval-source-map",
+    devtool: "eval-cheap-module-source-map",
     entry: {
         bundle: ["whatwg-fetch", "./index.ts"]
     },
@@ -50,8 +50,8 @@ module.exports = {
     },
     output: {
         path: __dirname + "/dist",
-        filename: "[name].[hash:5].js",
-        chunkFilename: "[name].[hash:5].js",
+        filename: "[name].js",
+        chunkFilename: "[name].js",
         publicPath
     },
     module: {
@@ -67,7 +67,7 @@ module.exports = {
                             scss: true,
                             postcss: postCssLoaderConfig.options,
                             typescript: {
-                                tsconfigFile: "./tsconfig.json"
+                                tsconfigFile: "./tsconfig.client.json"
                             }
                         })
                     }
@@ -75,8 +75,13 @@ module.exports = {
             },
             {
                 test: /\.ts$/,
-                use: "ts-loader",
-                exclude: /node_modules/
+                use: [{
+                    loader: "ts-loader",
+                    options: {
+                        configFile: "tsconfig.client.json"
+                    }
+                }],
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -129,7 +134,7 @@ module.exports = {
         new HtmlWebPackPlugin(
             merge(
                 {
-                    template: "./index.html",
+                    // template: "./index.html",
                     filename: "index.html",
                     hash: true
                 },
@@ -152,7 +157,7 @@ module.exports = {
             )
         ),
         new webpack.DefinePlugin({
-            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+            "process.env.NODE_ENV": JSON.stringify(mode),
             PUBLIC_URL: JSON.stringify(publicPath)
         }),
         !prod && new CaseSensitivePathsPlugin(),
@@ -163,80 +168,88 @@ module.exports = {
             filename: "[name].[contenthash:5].css",
             chunkFilename: "[name].[contenthash:5].chunk.css"
         }),
-        new ManifestPlugin({
+        new WebpackManifestPlugin({
             fileName: "asset-manifest.json",
             publicPath
         }),
-        new CopyPlugin([
-            {
-                from: path.resolve(__dirname, "public"),
-                to: path.resolve(__dirname, "dist")
-            }
-        ])
+        // new CopyPlugin({
+        //     patterns: [
+        //         {
+        //             from: path.resolve(__dirname, "public"),
+        //             to: path.resolve(__dirname, "dist")
+        //         }
+        //     ]
+        // })
         // new DashboardPlugin({port: DEV_PORT})
     ].filter(Boolean),
     optimization: {
         minimize: false,
         minimizer: [
+            (compiler) =>
             // This is only used in production mode
-            new TerserPlugin({
-                terserOptions: {
-                    parse: {
-                        // we want terser to parse ecma 8 code. However, we don't want it
-                        // to apply any minfication steps that turns valid ecma 5 code
-                        // into invalid ecma 5 code. This is why the 'compress' and 'output'
-                        // sections only apply transformations that are ecma 5 safe
-                        // https://github.com/facebook/create-react-app/pull/4234
-                        ecma: 8
+            {
+                new TerserPlugin({
+                    terserOptions: {
+                        parse: {
+                            // we want terser to parse ecma 8 code. However, we don't want it
+                            // to apply any minfication steps that turns valid ecma 5 code
+                            // into invalid ecma 5 code. This is why the 'compress' and 'output'
+                            // sections only apply transformations that are ecma 5 safe
+                            // https://github.com/facebook/create-react-app/pull/4234
+                            ecma: 8
+                        },
+                        compress: {
+                            ecma: 5,
+                            warnings: false,
+                            // Disabled because of an issue with Uglify breaking seemingly valid code:
+                            // https://github.com/facebook/create-react-app/issues/2376
+                            // Pending further investigation:
+                            // https://github.com/mishoo/UglifyJS2/issues/2011
+                            comparisons: false,
+                            // Disabled because of an issue with Terser breaking valid code:
+                            // https://github.com/facebook/create-react-app/issues/5250
+                            // Pending futher investigation:
+                            // https://github.com/terser-js/terser/issues/120
+                            inline: 2
+                        },
+                        mangle: {
+                            safari10: true
+                        },
+                        output: {
+                            ecma: 5,
+                            comments: false,
+                            // Turned on because emoji and regex is not minified properly using default
+                            // https://github.com/facebook/create-react-app/issues/2488
+                            ascii_only: true
+                        },
+                        // Use multi-process parallel running to improve the build speed
+                        // Default number of concurrent runs: os.cpus().length - 1
+                        parallel: true,
+                        // // Enable file caching
+                        // cache: true,
+                        // sourceMap: shouldUseSourceMap
                     },
-                    compress: {
-                        ecma: 5,
-                        warnings: false,
-                        // Disabled because of an issue with Uglify breaking seemingly valid code:
-                        // https://github.com/facebook/create-react-app/issues/2376
-                        // Pending further investigation:
-                        // https://github.com/mishoo/UglifyJS2/issues/2011
-                        comparisons: false,
-                        // Disabled because of an issue with Terser breaking valid code:
-                        // https://github.com/facebook/create-react-app/issues/5250
-                        // Pending futher investigation:
-                        // https://github.com/terser-js/terser/issues/120
-                        inline: 2
-                    },
-                    mangle: {
-                        safari10: true
-                    },
-                    output: {
-                        ecma: 5,
-                        comments: false,
-                        // Turned on because emoji and regex is not minified properly using default
-                        // https://github.com/facebook/create-react-app/issues/2488
-                        ascii_only: true
+
+                }).apply(compiler)
+            },
+            // This is only used in production mode
+            (compiler) => {
+                new OptimizeCSSAssetsPlugin({
+                    cssProcessorOptions: {
+                        parser: safePostCssParser,
+                        map: shouldUseSourceMap
+                            ? {
+                                // `inline: false` forces the sourcemap to be output into a
+                                // separate file
+                                inline: false,
+                                // `annotation: true` appends the sourceMappingURL to the end of
+                                // the css file, helping the browser find the sourcemap
+                                annotation: true
+                            }
+                            : false
                     }
-                },
-                // Use multi-process parallel running to improve the build speed
-                // Default number of concurrent runs: os.cpus().length - 1
-                parallel: true,
-                // Enable file caching
-                cache: true,
-                sourceMap: shouldUseSourceMap
-            }),
-            // This is only used in production mode
-            new OptimizeCSSAssetsPlugin({
-                cssProcessorOptions: {
-                    parser: safePostCssParser,
-                    map: shouldUseSourceMap
-                        ? {
-                            // `inline: false` forces the sourcemap to be output into a
-                            // separate file
-                            inline: false,
-                            // `annotation: true` appends the sourceMappingURL to the end of
-                            // the css file, helping the browser find the sourcemap
-                            annotation: true
-                        }
-                        : false
-                }
-            })
+                }).apply(compiler)
+            },
         ]
         // Automatically split vendor and commons
         // https://twitter.com/wSokra/status/969633336732905474
@@ -261,10 +274,66 @@ module.exports = {
         // // https://twitter.com/wSokra/status/969679223278505985
         // runtimeChunk: true
     },
-    devServer: {
-        // hot: true,
-        historyApiFallback: true,
-        port: DEV_PORT,
-        contentBase: "./dist"
-    }
+    // devServer: {
+    //     // hot: true,
+    //     historyApiFallback: true,
+    //     port: DEV_PORT,
+    //     contentBase: "./dist"
+    // }
 };
+
+// const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const nodeExternals = require('webpack-node-externals');
+
+const serverConfig = {
+    ...clientConfig,
+    externalsPresets: { node: true },
+    externals: [nodeExternals()],
+    entry: {
+        bundle: ["./server.ts"]
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".mjs", ".js", ".json"],
+        // plugins: [
+        //     new TsconfigPathsPlugin({
+        //         configFile: "tsconfig.server.json"
+        //     }),
+        // ],
+        mainFields: ["module", "main"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: [{
+                    loader: "ts-loader",
+                    options: {
+                        configFile: "tsconfig.server.json"
+                    }
+                }],
+                exclude: /node_modules/,
+
+            },
+            {
+                test: /\.json$/,
+                use: "json-loader"
+            },
+            {
+                loader: require.resolve("file-loader"),
+                // Exclude `js` files to keep "css" loader working as it injects
+                // its runtime that would otherwise be processed through "file" loader.
+                // Also exclude `html` and `json` extensions so they get processed
+                // by webpacks internal loaders.
+                exclude: [
+                    /\.(js|mjs|jsx|ts|tsx)$/,
+                    /\.json$/,
+                ],
+                options: {
+                    name: "[name].[hash:5].[ext]"
+                }
+            }
+        ]
+    },
+}
+
+module.exports = [serverConfig, clientConfig];

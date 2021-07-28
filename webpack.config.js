@@ -283,14 +283,16 @@ const clientConfig = {
 };
 
 // const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const nodeExternals = require('webpack-node-externals');
+const nodeExternals = require("webpack-node-externals");
 
 const serverConfig = {
     ...clientConfig,
     externalsPresets: { node: true },
     externals: [nodeExternals()],
-    entry: {
-        bundle: ["./server.ts"]
+    entry: "./server.ts",
+    output: {
+        path: __dirname + "/dist",
+        filename: "server.js",
     },
     resolve: {
         extensions: [".ts", ".tsx", ".mjs", ".js", ".json"],

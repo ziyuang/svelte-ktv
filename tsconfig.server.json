@@ -1,21 +1,15 @@
 {
-    "files": [
-        "src/server.ts"
-    ],
-    "exclude": [
-        "node_modules/*"
-    ],
-    "compilerOptions": {
-        "target": "ESNEXT",
-        "module": "ESNEXT",
-        "sourceMap": true,
-        "strict": true,
-        "noImplicitAny": true,
-        "moduleResolution": "node",
-        "types": [
-            "node"
-        ],
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
-    }
+  "files": ["src/server.ts"],
+  "exclude": ["node_modules/*"],
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNEXT",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
 }

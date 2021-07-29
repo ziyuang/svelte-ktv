@@ -91,7 +91,7 @@ const clientConfig = {
                      * For developing, use 'style-loader' instead.
                      * */
                     prod ? MiniCssExtractPlugin.loader : "style-loader",
-                    "css-loader?url=false"
+                    { loader: "css-loader", options: { url: false } }
                 ]
             },
             {
@@ -134,9 +134,9 @@ const clientConfig = {
         new HtmlWebPackPlugin(
             merge(
                 {
-                    // template: "./index.html",
+                    template: "./index.html",
                     filename: "index.html",
-                    hash: true
+                    // hash: true
                 },
                 prod
                     ? {
@@ -230,7 +230,7 @@ const clientConfig = {
                         // sourceMap: shouldUseSourceMap
                     },
 
-                }).apply(compiler)
+                }).apply(compiler);
             },
             // This is only used in production mode
             (compiler) => {
@@ -248,7 +248,7 @@ const clientConfig = {
                             }
                             : false
                     }
-                }).apply(compiler)
+                }).apply(compiler);
             },
         ]
         // Automatically split vendor and commons
@@ -336,6 +336,6 @@ const serverConfig = {
             }
         ]
     },
-}
+};
 
 module.exports = [serverConfig, clientConfig];

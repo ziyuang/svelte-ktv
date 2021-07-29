@@ -1,18 +1,16 @@
-// import express from "express";
+import express from "express";
 import * as fs from "fs";
 import * as path from "path";
+import * as ip from "ip";
 
-interface Singer {
-    name: string;
-    songs: [string, string][]; // (song name, video path)
-}
+import { Singer } from "./common";
 
 interface Repo {
     [singer: string]: [string, string][];
 }
 
 function createRepo(root: string): Singer[] {
-    const regex = /^(.+?)-(.+?)\[/;
+    const regex = /^(.+?)-(.+?)(?:\[|\()/;
     let repo: Repo = {};
     for (const file of fs.readdirSync(root, { withFileTypes: true })) {
         if (file.isFile() && file.name.endsWith(".mpg")) {
@@ -38,7 +36,17 @@ function createRepo(root: string): Singer[] {
     return singers;
 }
 
-// const repo = createRepo("videos");
-// for (const singer of repo) {
-//     console.log(singer.name, singer.songs);
-// }
+const app = express();
+app.get("/", function (req: express.Request, res: express.Response) {
+    res.sendFile("index.html", { root: "." });
+});
+app.get("/videos", (req: express.Request, res: express.Response) =>
+    res.send(createRepo("videos"))
+);
+app.use(express.static("."));
+
+const PORT = 3000;
+const ADDR = ip.address();
+app.listen(PORT, () =>
+    console.log(`Server listening at http://${ADDR}:${PORT}`)
+);

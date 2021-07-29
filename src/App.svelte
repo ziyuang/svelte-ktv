@@ -48,5 +48,18 @@
         background-color: white;
         left: 5px;
         opacity: 0.8;
+
+        // https://stackoverflow.com/a/42115371/688080
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
     }
 </style>

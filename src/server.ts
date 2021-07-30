@@ -1,6 +1,5 @@
 import express from "express";
 import * as fs from "fs";
-import * as path from "path";
 import * as ip from "ip";
 
 import { Singer } from "./common";
@@ -13,7 +12,7 @@ function createRepo(root: string): Singer[] {
     const regex = /^(.+?)-(.+?)(?:\[|\()/;
     let repo: Repo = {};
     for (const file of fs.readdirSync(root, { withFileTypes: true })) {
-        if (file.isFile() && file.name.endsWith(".mpg")) {
+        if (file.isFile() && file.name.endsWith(".mp4")) {
             const m = regex.exec(file.name);
             if (m) {
                 let singer = m[1];
@@ -21,7 +20,7 @@ function createRepo(root: string): Singer[] {
                 if (!(singer in repo)) {
                     repo[singer] = [];
                 }
-                repo[singer].push([songName, path.join(root, file.name)]);
+                repo[singer].push([songName, `${root}/${file.name}`]);
             }
         }
     }

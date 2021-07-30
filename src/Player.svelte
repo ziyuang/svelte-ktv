@@ -1,15 +1,17 @@
 <script lang="typescript">
     import { videoSource } from "./common";
 
-    let currentSource: string;
     let videoElement: HTMLVideoElement;
-    const unsubscribe = videoSource.subscribe((value) => {
-        currentSource = value;
-        if (currentSource !== "") videoElement.play();
-    });
 </script>
 
-<video src={currentSource} controls bind:this={videoElement}>
+<video
+    src={$videoSource}
+    controls
+    bind:this={videoElement}
+    on:loadeddata={() => {
+        if ($videoSource !== "") videoElement.play();
+    }}
+>
     <track kind="captions" />
 </video>
 

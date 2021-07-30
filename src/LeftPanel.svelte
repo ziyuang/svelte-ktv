@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { tweened } from "svelte/motion";
-    import { Singer } from "./common";
+    import { Singer, panelVisibility, createTweening } from "./common";
     import RepoView from "./RepoView.svelte";
 
     async function getRepo(): Promise<Singer[]> {
@@ -8,22 +7,14 @@
         return res.json();
     }
 
-    const visibility = tweened(1, {
-        duration: 100,
-    });
-
-    const xFull = 0;
-    const opacityFull = 0.8;
-    const xFolded = -249;
-    const opacityFolded = 0;
+    const leftTweening = createTweening(-245, 0);
+    const opacityTweening = createTweening(0, 0.8);
 </script>
 
 <div
-    on:mouseenter={() => visibility.set(1)}
-    on:mouseleave={() => visibility.set(0)}
-    style="left:{$visibility * xFull +
-        (1 - $visibility) * xFolded}px; opacity:{$visibility * opacityFull +
-        (1 - $visibility) * opacityFolded}"
+    on:mouseenter={() => panelVisibility.set(1)}
+    on:mouseleave={() => panelVisibility.set(0)}
+    style="left:{$leftTweening}px; opacity:{$opacityTweening}"
 >
     {#await getRepo() then repo}
         <RepoView {repo} />

@@ -1,11 +1,16 @@
 import express from "express";
 import * as fs from "fs";
 import * as ip from "ip";
+import * as assert from "assert";
 
-import { Singer } from "./common";
+import { Singer, SongEntry, Track } from "./common";
+
+interface SongRepo {
+    [song: string]: Track;
+}
 
 interface Repo {
-    [singer: string]: [string, string][];
+    [singer: string]: SongRepo;
 }
 
 function createRepo(root: string): Singer[] {
@@ -16,17 +21,38 @@ function createRepo(root: string): Singer[] {
             const m = regex.exec(file.name);
             if (m) {
                 let singer = m[1];
-                let songName = m[2];
+                let song = m[2];
                 if (!(singer in repo)) {
-                    repo[singer] = [];
+                    repo[singer] = {};
                 }
-                repo[singer].push([songName, `${root}/${file.name}`]);
+                if (!(song in repo[singer])) {
+                    repo[singer][song] = { video: "", audio: ["", ""] };
+                }
+                const filePath = `${root}/${file.name}`;
+                if (/video/.exec(file.name)) {
+                    repo[singer][song].video = filePath;
+                } else if (/vocal/.exec(file.name)) {
+                    repo[singer][song].audio[0] = filePath;
+                } else if (/instrumental/.exec(file.name)) {
+                    repo[singer][song].audio[1] = filePath;
+                } else {
+                    assert(false, `Unknown track: ${filePath}`);
+                }
             }
         }
     }
     let singers: Singer[] = [];
-    for (let [singer, songs] of Object.entries(repo)) {
-        songs.sort((song1, song2) => song1[0].localeCompare(song2[0], "zh"));
+    for (let [singer, songRepo] of Object.entries(repo)) {
+        const songNames = [...Object.keys(songRepo)].sort((song1, song2) =>
+            song1[0].localeCompare(song2[0], "zh")
+        );
+        const songs: Array<SongEntry> = songNames.map((name) => [
+            name,
+            {
+                video: songRepo[name].video,
+                audio: songRepo[name].audio,
+            },
+        ]);
         singers.push({ name: singer, songs: songs });
     }
     singers.sort((singer1, singer2) =>

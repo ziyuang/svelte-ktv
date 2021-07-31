@@ -1,20 +1,36 @@
 import { writable, derived } from "svelte/store";
-import { Tweened, tweened } from "svelte/motion";
+import { tweened, Tweened } from "svelte/motion";
+
+export interface Track {
+    video: string;
+    audio: [string, string]; // vocal, instrumental
+}
+
+// type SongPath = [string, string, string];
+export type SongEntry = [string, Track];
 
 export interface Singer {
     name: string;
-    songs: [string, string][]; // (song name, video path)
+    songs: SongEntry[]; // (song, [video, vocal, instrumental])
 }
 
-export const videoSource = writable("");
-
-export const panelVisibility = tweened(1, {
-    duration: 100,
+export const gblSource = writable<Track>({
+    video: "",
+    audio: ["", ""],
 });
+
+export const gblTrack = writable(1);
+
+export function getDefaultVisibilityTweening(defaultVisibility = 1) {
+    return tweened(defaultVisibility, { duration: 100 });
+}
 export function createTweening(
+    visibility: Tweened<number>,
     min: number,
-    max: number,
-    v: Tweened<number> = panelVisibility
+    max: number
 ) {
-    return derived(v, ($v) => (1 - $v) * min + $v * max);
+    return derived(
+        visibility,
+        ($visibility) => (1 - $visibility) * min + $visibility * max
+    );
 }

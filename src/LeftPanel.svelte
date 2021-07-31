@@ -1,5 +1,9 @@
 <script lang="typescript">
-    import { Singer, panelVisibility, createTweening } from "./common";
+    import {
+        Singer,
+        getDefaultVisibilityTweening,
+        createTweening,
+    } from "./common";
     import RepoView from "./RepoView.svelte";
 
     async function getRepo(): Promise<Singer[]> {
@@ -7,13 +11,15 @@
         return res.json();
     }
 
-    const leftTweening = createTweening(-245, 0);
-    const opacityTweening = createTweening(0, 0.8);
+    const visibility = getDefaultVisibilityTweening();
+    const leftTweening = createTweening(visibility, -230, 0);
+    const opacityTweening = createTweening(visibility, 0, 0.8);
 </script>
 
 <div
-    on:mouseenter={() => panelVisibility.set(1)}
-    on:mouseleave={() => panelVisibility.set(0)}
+    class="panel"
+    on:mouseenter={() => visibility.set(1)}
+    on:mouseleave={() => visibility.set(0)}
     style="left:{$leftTweening}px; opacity:{$opacityTweening}"
 >
     {#await getRepo() then repo}
@@ -22,18 +28,13 @@
 </div>
 
 <style lang="scss">
-    div {
-        position: absolute;
+    div.panel {
         border-radius: 0px 5px 5px 0px;
         width: 250px;
         height: 92vh;
         top: 5px;
         overflow-y: auto;
-        z-index: 100;
-        font-family: sans-serif;
-        background-color: white;
-        left: 5px;
-        opacity: 0.8;
+        left: 0px;
 
         // https://stackoverflow.com/a/42115371/688080
         &::-webkit-scrollbar {

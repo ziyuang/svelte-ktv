@@ -3,18 +3,18 @@
     // import "bootstrap/dist/css/bootstrap.min.css";
     // import "bootstrap/dist/css/bootstrap.min.css.map";
     import { fade, slide } from "svelte/transition";
-    import { Singer, videoSource } from "./common";
+    import { Singer, gblSource } from "./common";
 
     export let singer: Singer;
     let expanded = false;
 
-    function toggle() {
+    function toggleExpansion() {
         expanded = !expanded;
     }
 </script>
 
 <div class="singer">
-    <div class="singer-name" on:click={toggle}>
+    <div class="singer-name" on:click={toggleExpansion}>
         <div class="singer-name-icon">
             {#if expanded}
                 <div transition:fade={{ duration: 200 }}>🎤</div>
@@ -25,7 +25,7 @@
     {#if expanded}
         <ul transition:slide={{ duration: 50 * singer.songs.length }}>
             {#each singer.songs as song}
-                <li on:click={() => videoSource.set(song[1])}>
+                <li on:click={() => gblSource.set(song[1])}>
                     <div class="song-name">{song[0]}</div>
                 </li>
             {/each}
@@ -41,6 +41,10 @@
         &:hover {
             background-color: AliceBlue;
         }
+    }
+
+    div.song-name:active {
+        background-color: Aqua;
     }
 
     div.singer {

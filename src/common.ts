@@ -6,12 +6,11 @@ export interface Track {
     audio: [string, string]; // vocal, instrumental
 }
 
-// type SongPath = [string, string, string];
 export type SongEntry = [string, Track];
 
 export interface Singer {
     name: string;
-    songs: SongEntry[]; // (song, [video, vocal, instrumental])
+    songs: SongEntry[];
 }
 
 export const gblSource = writable<Track>({

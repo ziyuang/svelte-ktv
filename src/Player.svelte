@@ -4,9 +4,14 @@
 
     let videoElem: HTMLVideoElement;
     let audioElems: [HTMLAudioElement, HTMLAudioElement] = [null, null];
+    export let mediaElems: HTMLMediaElement[] = [
+        videoElem,
+        audioElems[0],
+        audioElems[1],
+    ];
+
     let videoReady = false;
     let audioReady = [false, false];
-
     const allReady = writable(false);
     allReady.subscribe((value) => {
         if (value) {
@@ -18,6 +23,7 @@
                 }
             }
         }
+        mediaElems = [videoElem, audioElems[0], audioElems[1]];
     });
 
     gblSource.subscribe(() => {
@@ -28,6 +34,13 @@
             if (audioElems[i]) audioElems[i].volume = +(i == value);
         }
     });
+    // on:keydown={(e) => {
+    //     console.log(e.code);
+    //     if (e.key === " ") togglePause();
+    // }}
+    // on:click={(e) => {
+    //     if (e.button == 0) togglePause();
+    // }}
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
@@ -43,6 +56,7 @@
         }
     }}
 />
+
 {#each [0, 1] as i}
     <audio
         src={$gblSource.audio[i]}

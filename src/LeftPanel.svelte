@@ -13,7 +13,7 @@
 
     const visibility = getDefaultVisibilityTweening();
     const leftTweening = createTweening(visibility, -230, 0);
-    const opacityTweening = createTweening(visibility, 0, 0.8);
+    const opacityTweening = createTweening(visibility, 0, 0.7);
 </script>
 
 <div

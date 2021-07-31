@@ -1,7 +1,7 @@
 import express from "express";
 import * as fs from "fs";
 import * as ip from "ip";
-import * as assert from "assert";
+import { strict as assert } from 'assert';
 
 import { Singer, SongEntry, Track } from "./common";
 
@@ -46,7 +46,7 @@ function createRepo(root: string): Singer[] {
         const songNames = [...Object.keys(songRepo)].sort((song1, song2) =>
             song1[0].localeCompare(song2[0], "zh")
         );
-        const songs: Array<SongEntry> = songNames.map((name) => [
+        const songs: SongEntry[] = songNames.map((name) => [
             name,
             {
                 video: songRepo[name].video,

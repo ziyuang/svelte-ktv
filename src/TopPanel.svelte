@@ -11,7 +11,7 @@
 
     const visibility = getDefaultVisibilityTweening(0);
     const topTweening = createTweening(visibility, -30, 0);
-    const opacityTweening = createTweening(visibility, 0, 0.8);
+    const opacityTweening = createTweening(visibility, 0, 0.7);
 </script>
 
 <div

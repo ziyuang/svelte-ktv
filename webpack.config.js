@@ -172,14 +172,14 @@ const clientConfig = {
             fileName: "asset-manifest.json",
             publicPath
         }),
-        // new CopyPlugin({
-        //     patterns: [
-        //         {
-        //             from: path.resolve(__dirname, "public"),
-        //             to: path.resolve(__dirname, "dist")
-        //         }
-        //     ]
-        // })
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: "*.svg",
+                    to: path.resolve(__dirname, "dist")
+                }
+            ]
+        })
         // new DashboardPlugin({port: DEV_PORT})
     ].filter(Boolean),
     optimization: {

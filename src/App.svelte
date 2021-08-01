@@ -10,6 +10,7 @@
     import TopPanel from "./TopPanel.svelte";
     import LeftPanel from "./LeftPanel.svelte";
     import RightPanel from "./RightPanel.svelte";
+    import HelpPanel from "./HelpPanel.svelte";
     import Player from "./Player.svelte";
 
     let mediaElems: HTMLMediaElement[];
@@ -113,6 +114,7 @@
 <TopPanel />
 <LeftPanel />
 <RightPanel />
+<HelpPanel />
 <div
     on:click={(e) => {
         if (e.button == 0) togglePause();

@@ -3,6 +3,7 @@
         gLeftPanelVisible,
         gTopPanelVisible,
         gRightPanelVisible,
+        gHelpPanelVisible,
         gAudioTrack,
         gCurrentPlayingIndex,
         gPlaylist,
@@ -73,6 +74,9 @@
             case "KeyE":
                 if ($gCurrentPlayingIndex < $gPlaylist.length - 1)
                     gCurrentPlayingIndex.set($gCurrentPlayingIndex + 1);
+                break;
+            case "KeyH":
+                gHelpPanelVisible.set(!$gHelpPanelVisible);
                 break;
             case "ArrowLeft":
                 refTime = mediaElems[0].currentTime;

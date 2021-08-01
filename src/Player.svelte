@@ -5,6 +5,7 @@
         gAudioTrack,
         gPlaylist,
         gCurrentPlayingIndex,
+        gHelpPanelVisible,
     } from "./common";
 
     let videoElem: HTMLVideoElement;
@@ -30,6 +31,7 @@
                     audioElems[i].play();
                 }
             }
+            gHelpPanelVisible.set(false);
         }
         mediaElems = [videoElem, audioElems[0], audioElems[1]];
     });

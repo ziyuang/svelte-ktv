@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { fade } from "svelte/transition";
-    import { gMediaSource } from "./common";
+    import { gHelpPanelVisible } from "./common";
 </script>
 
-{#if $gMediaSource.video === ""}
+{#if $gHelpPanelVisible}
     <div class="panel" transition:fade={{ duration: 100 }}>
         <div class="caption">快捷键</div>
         <img src="key-help.svg" alt="key shortcuts" />
@@ -12,7 +12,7 @@
 
 <style lang="scss">
     div.panel {
-        background-color: transparent;
+        background-color: floralwhite;
         border-radius: 5px;
         border: 1px solid darkgray;
         padding: 10px;

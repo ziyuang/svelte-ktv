@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="34.944447mm"
-   height="28.412701mm"
-   viewBox="0 0 34.944447 28.4127"
+   width="34.881344mm"
+   height="28.20277mm"
+   viewBox="0 0 34.881344 28.20277"
    version="1.1"
    id="svg1794"
    inkscape:version="1.1 (c68e22c387, 2021-05-23)"
@@ -24,7 +24,7 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="4.192802"
-     inkscape:cx="3.6968118"
+     inkscape:cx="60.222257"
      inkscape:cy="55.452177"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -91,7 +91,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-66.384444,-116.94742)">
+     transform="translate(-66.447548,-116.94742)">
     <path
        style="fill:#97c5d5;fill-rule:evenodd;stroke:#202326;stroke-width:0"
        id="path13"
@@ -130,7 +130,7 @@
        d="m 89.701778,130.4243 h 5.285052 c 0.528505,0 0.792758,0.26425 0.792758,0.52851 v 5.0208 c 0,0.26425 -0.264253,0.5285 -0.792758,0.5285 h -5.285052 c -0.528505,0 -0.792758,-0.26425 -0.792758,-0.5285 v -5.0208 c 0,-0.26426 0.264253,-0.52851 0.792758,-0.52851 z" />
     <g
        id="g201"
-       transform="matrix(0.10642029,0,0,0.10626819,31.188064,108.72289)"
+       transform="matrix(0.10642029,0,0,0.10626819,31.188064,108.34426)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -144,7 +144,7 @@
     </g>
     <g
        id="g205"
-       transform="matrix(0.10642029,0,0,0.10626819,38.829653,108.76399)"
+       transform="matrix(0.10642029,0,0,0.10626819,38.829653,108.38536)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -158,7 +158,7 @@
     </g>
     <g
        id="g209"
-       transform="matrix(0.10642029,0,0,0.10626819,46.999015,108.76399)"
+       transform="matrix(0.10642029,0,0,0.10626819,46.999015,108.38536)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -172,7 +172,7 @@
     </g>
     <g
        id="g213"
-       transform="matrix(0.10642029,0,0,0.10626819,54.702803,108.76399)"
+       transform="matrix(0.10642029,0,0,0.10626819,54.702803,108.38536)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -186,7 +186,7 @@
     </g>
     <g
        id="g241"
-       transform="matrix(0.11273807,0,0,0.11257695,30.849288,114.36341)"
+       transform="matrix(0.11273807,0,0,0.11257695,30.849288,114.11099)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -200,7 +200,7 @@
     </g>
     <g
        id="g245"
-       transform="matrix(0.11273807,0,0,0.11257695,38.652171,114.36341)"
+       transform="matrix(0.11273807,0,0,0.11257695,38.652171,114.11099)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -214,7 +214,7 @@
     </g>
     <g
        id="g249"
-       transform="matrix(0.11273807,0,0,0.11257695,46.492057,114.36341)"
+       transform="matrix(0.11273807,0,0,0.11257695,46.492057,114.11099)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:18px;font-family:Arial;fill:#2b2828"
@@ -228,7 +228,7 @@
     </g>
     <g
        id="g507"
-       transform="matrix(0.17416197,0,0,0.17391304,-0.28505146,89.01945)"
+       transform="matrix(0.17416197,0,0,0.17391304,-0.28505146,88.679596)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:12px;font-family:Arial;fill:#2b2828"
@@ -242,7 +242,7 @@
     </g>
     <g
        id="g511"
-       transform="matrix(0.17416197,0,0,0.17391304,7.4558851,89.01945)"
+       transform="matrix(0.17416197,0,0,0.17391304,7.4558851,88.679596)"
        style="fill-rule:evenodd">
       <g
          style="font-weight:normal;font-size:12px;font-family:Arial;fill:#2b2828"
@@ -258,162 +258,174 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="68.491013"
-       y="119.62673"
+       y="119.28687"
        id="text3247"><tspan
          sodipodi:role="line"
          id="tspan3245"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="68.491013"
-         y="119.62673">原唱</tspan></text>
+         y="119.28687">原唱</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="96.600845"
-       y="126.19457"
+       y="126.06837"
        id="text3247-97"><tspan
          sodipodi:role="line"
          id="tspan3245-1"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="96.600845"
-         y="126.19457">重放</tspan></text>
+         y="126.06837">重放</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="76.275444"
-       y="119.64878"
+       y="119.30892"
        id="text3247-9"><tspan
          sodipodi:role="line"
          id="tspan3245-4"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="76.275444"
-         y="119.64878">伴奏</tspan></text>
+         y="119.30892">伴奏</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="72.390587"
-       y="126.2056"
+       y="126.07939"
        id="text10136"><tspan
          sodipodi:role="line"
          id="tspan10134"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="72.390587"
-         y="126.2056">上一首</tspan></text>
+         y="126.07939">上一首</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="88.108109"
-       y="126.2056"
+       y="126.07939"
        id="text10136-6"><tspan
          sodipodi:role="line"
          id="tspan10134-0"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="88.108109"
-         y="126.2056">下一首</tspan></text>
+         y="126.07939">下一首</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="75.161934"
-       y="133.02661"
+       y="132.71109"
        id="text27410"><tspan
          sodipodi:role="line"
          id="tspan27408"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="75.161934"
-         y="133.02661">曲库</tspan></text>
+         y="132.71109">曲库</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="89.53035"
-       y="133.02826"
+       y="132.71274"
        id="text33622"><tspan
          sodipodi:role="line"
          id="tspan33620"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="89.53035"
-         y="133.02826">播放列表</tspan></text>
+         y="132.71274">播放列表</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="79.504555"
-       y="126.20284"
+       y="126.07664"
        id="text39212"><tspan
          sodipodi:role="line"
          id="tspan39210"
          style="font-size:1.41111px;stroke-width:0.264583px"
          x="79.504555"
-         y="126.20284">歌曲控制</tspan></text>
+         y="126.07664">歌曲控制</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.05833px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="84.428612"
-       y="132.20784"
+       y="131.89232"
        id="text44938"><tspan
          sodipodi:role="line"
          id="tspan44936"
          style="font-size:1.05833px;text-align:center;text-anchor:middle;stroke-width:0.264583px"
          x="84.428612"
-         y="132.20784">显示/隐藏</tspan><tspan
+         y="131.89232">显示/隐藏</tspan><tspan
          sodipodi:role="line"
          style="font-size:1.05833px;text-align:center;text-anchor:middle;stroke-width:0.264583px"
          x="84.428612"
-         y="133.63365"
+         y="133.31813"
          id="tspan44940">所有面板</tspan></text>
-    <path
-       style="fill:#97c5d5;fill-rule:evenodd;stroke:#202326;stroke-width:0"
-       id="path185"
-       d="m 67.416024,139.01806 h -0.810526 c -0.147369,0 -0.221053,0.26425 -0.221053,0.79275 v 4.75655 c 0,0.52851 0.07368,0.79276 0.221053,0.79276 h 0.810526 12.378955 1.326317 c 0,0 0.07368,-0.26425 0.07368,-0.79276 v -4.75655 c 0,-0.5285 -0.07368,-0.79275 -0.07368,-0.79275 h -1.326317 z" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="68.522163"
-       y="142.68002"
-       id="text64539"><tspan
-         sodipodi:role="line"
-         id="tspan64537"
-         style="font-size:1.41111px;stroke-width:0.264583px"
-         x="68.522163"
-         y="142.68002">空格：播放/暂停</tspan></text>
     <g
-       id="g79498"
-       transform="translate(0.20949582,-1.4513911)">
+       id="g40086"
+       transform="matrix(1,0,0,0.98719753,-4.1533752e-8,1.7814664)">
       <path
          style="fill:#a8d1b1;fill-rule:evenodd;stroke:#202326;stroke-width:0"
          id="path149"
-         d="m 87.315162,140.60158 h 5.285052 c 0.26425,0 0.5285,0.26425 0.5285,0.5285 v 5.0208 c 0,0.26425 -0.26425,0.52851 -0.5285,0.52851 h -5.285052 c -0.528506,0 -0.792758,-0.26426 -0.792758,-0.52851 v -5.0208 c 0,-0.26425 0.264252,-0.5285 0.792758,-0.5285 z" />
+         d="m 87.524658,139.15019 h 5.285052 c 0.26425,0 0.5285,0.26425 0.5285,0.5285 v 5.0208 c 0,0.26425 -0.26425,0.52851 -0.5285,0.52851 h -5.285052 c -0.528506,0 -0.792758,-0.26426 -0.792758,-0.52851 v -5.0208 c 0,-0.26425 0.264252,-0.5285 0.792758,-0.5285 z" />
       <path
          style="fill:#a8d1b1;fill-rule:evenodd;stroke:#202326;stroke-width:0"
          id="path151"
-         d="m 95.242744,140.60158 h 5.285046 c 0.26425,0 0.5285,0.26425 0.5285,0.5285 v 5.0208 c 0,0.26425 -0.26425,0.52851 -0.5285,0.52851 h -5.285046 c -0.52851,0 -0.79276,-0.26426 -0.79276,-0.52851 v -5.0208 c 0,-0.26425 0.26425,-0.5285 0.79276,-0.5285 z" />
+         d="m 95.45224,139.15019 h 5.28505 c 0.26425,0 0.5285,0.26425 0.5285,0.5285 v 5.0208 c 0,0.26425 -0.26425,0.52851 -0.5285,0.52851 h -5.28505 c -0.52851,0 -0.79276,-0.26426 -0.79276,-0.52851 v -5.0208 c 0,-0.26425 0.26425,-0.5285 0.79276,-0.5285 z" />
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#2b2828;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM1)"
+         style="fill:none;fill-rule:evenodd;stroke:#2b2828;stroke-width:0.231797px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM1)"
          id="path11623-1"
-         d="M 91.524299,145.17261 H 88.878461" />
+         d="M 91.379681,143.56978 H 89.348932" />
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#2b2828;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM1)"
+         style="fill:none;fill-rule:evenodd;stroke:#2b2828;stroke-width:0.231797px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM1)"
          id="path11623-1-7"
-         d="m 96.054401,145.17261 h 2.645831" />
+         d="m 96.618012,143.56978 h 2.030743" />
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="86.809036"
-         y="143.18886"
+         x="87.130669"
+         y="141.61127"
          id="text72025"><tspan
            sodipodi:role="line"
            id="tspan72023"
            style="font-size:1.41111px;stroke-width:0.264583px"
-           x="86.809036"
-           y="143.18886">后退10秒</tspan></text>
+           x="87.130669"
+           y="141.61127">后退<tspan
+   style="font-size:1.23472px"
+   id="tspan30433">10</tspan>秒</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="94.742126"
-         y="143.18886"
+         x="95.063759"
+         y="141.61127"
          id="text72025-3"><tspan
            sodipodi:role="line"
            id="tspan72023-0"
            style="font-size:1.41111px;stroke-width:0.264583px"
-           x="94.742126"
-           y="143.18886">前进10秒</tspan></text>
+           x="95.063759"
+           y="141.61127">前进<tspan
+   style="font-size:1.23472px"
+   id="tspan32153">10</tspan>秒</tspan></text>
+    </g>
+    <g
+       id="g40074"
+       transform="matrix(1,0,0,0.9751836,0,3.5820216)">
+      <rect
+         style="fill:#97c5d5;fill-opacity:1;stroke:none;stroke-width:1.80711;stroke-linejoin:round;stroke-miterlimit:3.6"
+         id="rect39395"
+         width="14.811"
+         height="6.1526875"
+         x="66.447548"
+         y="139.0181"
+         ry="0.79586625" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="68.585503"
+         y="142.58537"
+         id="text64539"><tspan
+           sodipodi:role="line"
+           id="tspan64537"
+           style="font-size:1.41111px;stroke-width:0.264583px"
+           x="68.585503"
+           y="142.58537">空格：播放/暂停</tspan></text>
     </g>
   </g>
 </svg>

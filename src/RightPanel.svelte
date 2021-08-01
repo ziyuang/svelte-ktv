@@ -15,16 +15,22 @@
     const rightTweening = deriveTweening(visibility, -250, 0);
     const opacityTweening = deriveTweening(visibility, 0, 0.7);
     gRightPanelVisible.subscribe((value) => visibility.set(+value));
+
+    function showPanel() {
+        gRightPanelVisible.set(true);
+        for (const timer of $gRightPanelFoldingTimerIds)
+            window.clearTimeout(timer);
+    }
+
+    function hidePanel() {
+        gRightPanelVisible.set(false);
+    }
 </script>
 
 <div
     class="panel"
-    on:mouseenter={() => {
-        gRightPanelVisible.set(true);
-        for (const timer of $gRightPanelFoldingTimerIds)
-            window.clearTimeout(timer);
-    }}
-    on:mouseleave={() => gRightPanelVisible.set(false)}
+    on:mouseenter={showPanel}
+    on:mouseleave={hidePanel}
     style="right:{$rightTweening}px; opacity:{$opacityTweening}"
 >
     <ul>
@@ -32,9 +38,26 @@
             <li
                 transition:fade={{ duration: 200 }}
                 on:click={() => {
-                    const newSource = singerAndSong[1][1];
-                    if ($gMediaSource !== newSource)
-                        gCurrentPlayingIndex.set(idx);
+                    // const newSource = singerAndSong[1][1];
+                    if (idx < $gCurrentPlayingIndex) {
+                        // gCurrentPlayingIndex.set(idx);
+                        gPlaylist.set([
+                            ...$gPlaylist.slice(0, idx),
+                            ...$gPlaylist.slice(
+                                idx + 1,
+                                $gCurrentPlayingIndex + 1
+                            ),
+                            $gPlaylist[idx],
+                            ...$gPlaylist.slice($gCurrentPlayingIndex + 1),
+                        ]);
+                    } else if (idx > $gCurrentPlayingIndex) {
+                        gPlaylist.set([
+                            ...$gPlaylist.slice(0, $gCurrentPlayingIndex + 1),
+                            $gPlaylist[idx],
+                            ...$gPlaylist.slice($gCurrentPlayingIndex + 1, idx),
+                            ...$gPlaylist.slice(idx + 1),
+                        ]);
+                    }
                 }}
                 class={idx < $gCurrentPlayingIndex ? "played" : ""}
             >

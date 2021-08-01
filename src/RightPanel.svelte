@@ -1,6 +1,6 @@
 <script lang="typescript">
     // import DragDropList from "svelte-dragdroplist";
-    import { fade } from "svelte/transition";
+    import { fade, slide } from "svelte/transition";
     import {
         gMediaSource,
         gCurrentPlayingIndex,
@@ -34,13 +34,12 @@
     style="right:{$rightTweening}px; opacity:{$opacityTweening}"
 >
     <ul>
-        {#each $gPlaylist as singerAndSong, idx}
+        {#each $gPlaylist as playListItem, idx}
             <li
-                transition:fade={{ duration: 200 }}
+                in:slide={{ duration: 200 }}
+                out:fade={{ duration: 200 }}
                 on:click={() => {
-                    // const newSource = singerAndSong[1][1];
                     if (idx < $gCurrentPlayingIndex) {
-                        // gCurrentPlayingIndex.set(idx);
                         gPlaylist.set([
                             ...$gPlaylist.slice(0, idx),
                             ...$gPlaylist.slice(
@@ -50,6 +49,9 @@
                             $gPlaylist[idx],
                             ...$gPlaylist.slice($gCurrentPlayingIndex + 1),
                         ]);
+                        gMediaSource.set(
+                            $gPlaylist[$gCurrentPlayingIndex].song.source
+                        );
                     } else if (idx > $gCurrentPlayingIndex) {
                         gPlaylist.set([
                             ...$gPlaylist.slice(0, $gCurrentPlayingIndex + 1),
@@ -57,6 +59,7 @@
                             ...$gPlaylist.slice($gCurrentPlayingIndex + 1, idx),
                             ...$gPlaylist.slice(idx + 1),
                         ]);
+                        gCurrentPlayingIndex.set($gCurrentPlayingIndex + 1);
                     }
                 }}
                 class={idx < $gCurrentPlayingIndex ? "played" : ""}
@@ -68,7 +71,7 @@
                         {/if}
                     </div>
                     <div class="singer-song-name">
-                        {singerAndSong[0] + " - " + singerAndSong[1][0]}
+                        {playListItem.singer + " - " + playListItem.song.name}
                     </div>
                     <div
                         class="delete-icon"
@@ -83,7 +86,7 @@
                                 );
                             } else if (idx == $gCurrentPlayingIndex) {
                                 gMediaSource.set(
-                                    $gPlaylist[$gCurrentPlayingIndex][1][1]
+                                    $gPlaylist[$gCurrentPlayingIndex].song.source
                                 );
                             }
                         }}

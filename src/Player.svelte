@@ -46,7 +46,7 @@
     });
     gCurrentPlayingIndex.subscribe((idx) => {
         if (0 <= idx && idx <= $gPlaylist.length - 1)
-            gMediaSource.set($gPlaylist[idx][1][1]);
+            gMediaSource.set($gPlaylist[idx].song.source);
     });
 
     function playNext() {

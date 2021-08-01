@@ -1,16 +1,16 @@
 import express from "express";
 import * as fs from "fs";
 import * as ip from "ip";
-import { strict as assert } from 'assert';
+import { strict as assert } from "assert";
 
 import { Singer, Song, MediaSource } from "./common";
 
-interface SongRepo {
+interface SongPath {
     [song: string]: MediaSource;
 }
 
 interface Repo {
-    [singer: string]: SongRepo;
+    [singer: string]: SongPath;
 }
 
 function createRepo(root: string): Singer[] {
@@ -46,13 +46,13 @@ function createRepo(root: string): Singer[] {
         const songNames = [...Object.keys(songRepo)].sort((song1, song2) =>
             song1[0].localeCompare(song2[0], "zh")
         );
-        const songs: Song[] = songNames.map((name) => [
-            name,
-            {
+        const songs: Song[] = songNames.map((name) => ({
+            name: name,
+            source: {
                 video: songRepo[name].video,
                 audio: songRepo[name].audio,
             },
-        ]);
+        }));
         singers.push({ name: singer, songs: songs });
     }
     singers.sort((singer1, singer2) =>

@@ -34,7 +34,10 @@
             {#each singer.songs as song}
                 <li
                     on:click={() => {
-                        gPlaylist.set([...$gPlaylist, [singer.name, song]]);
+                        gPlaylist.set([
+                            ...$gPlaylist,
+                            { singer: singer.name, song: song },
+                        ]);
                         gRightPanelVisible.set(true);
                         if ($gPlaylist.length == 1) {
                             gCurrentPlayingIndex.set(0);
@@ -49,7 +52,7 @@
                         ]);
                     }}
                 >
-                    <div class="song-name">{song[0]}</div>
+                    <div class="song-name">{song.name}</div>
                 </li>
             {/each}
         </ul>

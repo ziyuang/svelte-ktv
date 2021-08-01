@@ -6,11 +6,21 @@ export interface MediaSource {
     audio: [string, string]; // vocal, instrumental
 }
 
-export type Song = [string, MediaSource]; // [song name, source]
+// export type Song = [string, MediaSource]; // [song name, source]
+
+export interface Song {
+    name: string;
+    source: MediaSource;
+}
 
 export interface Singer {
     name: string;
     songs: Song[];
+}
+
+export interface PlayListItem {
+    singer: string;
+    song: Song;
 }
 
 export const gMediaSource = writable<MediaSource>({
@@ -18,7 +28,7 @@ export const gMediaSource = writable<MediaSource>({
     audio: ["", ""],
 });
 export const gAudioTrack = writable(1);
-export const gPlaylist = writable<[string, Song][]>([]);
+export const gPlaylist = writable<PlayListItem[]>([]);
 export const gCurrentPlayingIndex = writable(-1);
 export const gLeftPanelVisible = writable(true);
 export const gTopPanelVisible = writable(false);

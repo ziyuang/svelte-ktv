@@ -86,12 +86,13 @@
                                 );
                             } else if (idx == $gCurrentPlayingIndex) {
                                 gMediaSource.set(
-                                    $gPlaylist[$gCurrentPlayingIndex].song.source
+                                    $gPlaylist[$gCurrentPlayingIndex].song
+                                        .source
                                 );
                             }
                         }}
                     >
-                        ╳
+                        <span>╳</span>
                     </div>
                 </div>
             </li>
@@ -103,12 +104,13 @@
     div.panel {
         border-radius: 5px 0px 0px 5px;
         width: 280px;
-        height: 92vh;
+        max-height: 92vh;
         top: 5px;
         overflow-y: auto;
         right: 0px;
         & ul {
             padding-left: 15px;
+            padding-right: 15px;
             & li {
                 cursor: pointer;
                 list-style-type: none;
@@ -128,14 +130,22 @@
                     & div.singer-song-name {
                         width: 200px;
                     }
-                    & div.playing-icon,
-                    & div.delete-icon {
+                    & div.playing-icon {
                         width: 30px;
                     }
                     & div.delete-icon {
-                        font-size: 8pt;
+                        border-radius: 5px;
+                        width: 20px;
+                        font-size: 6pt;
+                        text-align: center;
                         &:hover {
                             font-weight: bold;
+                            color: white;
+                            background-color: lightsalmon;
+                        }
+                        & span {
+                            display: inline-block;
+                            margin-top: 5px;
                         }
                     }
                 }

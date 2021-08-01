@@ -48,6 +48,12 @@
         if (0 <= idx && idx <= $gPlaylist.length - 1)
             gMediaSource.set($gPlaylist[idx][1][1]);
     });
+
+    function playNext() {
+        gCurrentPlayingIndex.set(
+            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length)
+        );
+    }
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
@@ -62,11 +68,7 @@
             allReady.set(videoReady && audioReady[0] && audioReady[1]);
         }
     }}
-    on:ended={() => {
-        gCurrentPlayingIndex.set(
-            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length)
-        );
-    }}
+    on:ended={playNext}
 />
 
 {#each [0, 1] as i}

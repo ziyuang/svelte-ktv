@@ -8,6 +8,7 @@
         getVisibilityTweening,
         deriveTweening,
         gRightPanelVisible,
+        gRightPanelFoldingTimerIds,
     } from "./common";
 
     const visibility = getVisibilityTweening(0);
@@ -18,7 +19,11 @@
 
 <div
     class="panel"
-    on:mouseenter={() => gRightPanelVisible.set(true)}
+    on:mouseenter={() => {
+        gRightPanelVisible.set(true);
+        for (const timer of $gRightPanelFoldingTimerIds)
+            window.clearTimeout(timer);
+    }}
     on:mouseleave={() => gRightPanelVisible.set(false)}
     style="right:{$rightTweening}px; opacity:{$opacityTweening}"
 >
@@ -44,11 +49,20 @@
                     </div>
                     <div
                         class="delete-icon"
-                        on:click={() => {
+                        on:click|stopPropagation={() => {
                             gPlaylist.set([
                                 ...$gPlaylist.slice(0, idx),
                                 ...$gPlaylist.slice(idx + 1),
                             ]);
+                            if (idx < $gCurrentPlayingIndex) {
+                                gCurrentPlayingIndex.set(
+                                    $gCurrentPlayingIndex - 1
+                                );
+                            } else if (idx == $gCurrentPlayingIndex) {
+                                gMediaSource.set(
+                                    $gPlaylist[$gCurrentPlayingIndex][1][1]
+                                );
+                            }
                         }}
                     >
                         ╳
@@ -94,7 +108,9 @@
                     }
                     & div.delete-icon {
                         font-size: 8pt;
-                        vertical-align: middle;
+                        &:hover {
+                            font-weight: bold;
+                        }
                     }
                 }
             }

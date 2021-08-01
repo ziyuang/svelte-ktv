@@ -8,6 +8,7 @@
         gPlaylist,
         gRightPanelVisible,
         gCurrentPlayingIndex,
+        gRightPanelFoldingTimerIds,
     } from "./common";
 
     export let singer: Singer;
@@ -38,10 +39,14 @@
                         if ($gPlaylist.length == 1) {
                             gCurrentPlayingIndex.set(0);
                         }
-                        setTimeout(
+                        const timer = window.setTimeout(
                             () => gRightPanelVisible.set(false),
                             rightPanelFoldingDelay
                         );
+                        gRightPanelFoldingTimerIds.set([
+                            ...$gRightPanelFoldingTimerIds,
+                            timer,
+                        ]);
                     }}
                 >
                     <div class="song-name">{song[0]}</div>

@@ -25,6 +25,8 @@ export const gTopPanelVisible = writable(false);
 export const gRightPanelVisible = writable(false);
 export const gHelpPanelVisible = writable(true);
 
+export const gRightPanelFoldingTimerIds = writable<number[]>([]);
+
 export function getVisibilityTweening(defaultVisibility = 1) {
     return tweened(defaultVisibility, { duration: 100 });
 }

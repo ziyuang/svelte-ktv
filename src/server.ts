@@ -3,10 +3,10 @@ import * as fs from "fs";
 import * as ip from "ip";
 import { strict as assert } from 'assert';
 
-import { Singer, SongEntry, Track } from "./common";
+import { Singer, Song, MediaSource } from "./common";
 
 interface SongRepo {
-    [song: string]: Track;
+    [song: string]: MediaSource;
 }
 
 interface Repo {
@@ -46,7 +46,7 @@ function createRepo(root: string): Singer[] {
         const songNames = [...Object.keys(songRepo)].sort((song1, song2) =>
             song1[0].localeCompare(song2[0], "zh")
         );
-        const songs: SongEntry[] = songNames.map((name) => [
+        const songs: Song[] = songNames.map((name) => [
             name,
             {
                 video: songRepo[name].video,

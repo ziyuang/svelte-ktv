@@ -1,9 +1,17 @@
 <script lang="typescript">
     import { writable } from "svelte/store";
-    import { gblSource, gblTrack } from "./common";
+    import {
+        gMediaSource,
+        gAudioTrack,
+        gPlaylist,
+        gCurrentPlayingIndex,
+    } from "./common";
 
     let videoElem: HTMLVideoElement;
-    let audioElems: [HTMLAudioElement, HTMLAudioElement] = [null, null];
+    let audioElems: [HTMLAudioElement, HTMLAudioElement] = [
+        undefined,
+        undefined,
+    ];
     export let mediaElems: HTMLMediaElement[] = [
         videoElem,
         audioElems[0],
@@ -18,7 +26,7 @@
             videoElem.play();
             for (let i = 0; i < audioElems.length; i++) {
                 if (audioElems[i]) {
-                    audioElems[i].volume = +(i == $gblTrack);
+                    audioElems[i].volume = +(i == $gAudioTrack);
                     audioElems[i].play();
                 }
             }
@@ -26,45 +34,47 @@
         mediaElems = [videoElem, audioElems[0], audioElems[1]];
     });
 
-    gblSource.subscribe(() => {
+    gMediaSource.subscribe(() => {
         videoReady = audioReady[0] = audioReady[1] = false;
     });
-    gblTrack.subscribe((value) => {
+    gAudioTrack.subscribe((value) => {
         for (let i = 0; i < audioElems.length; i++) {
             if (audioElems[i]) audioElems[i].volume = +(i == value);
         }
     });
-    // on:keydown={(e) => {
-    //     console.log(e.code);
-    //     if (e.key === " ") togglePause();
-    // }}
-    // on:click={(e) => {
-    //     if (e.button == 0) togglePause();
-    // }}
+    gCurrentPlayingIndex.subscribe((idx) => {
+        if (0 <= idx && idx <= $gPlaylist.length - 1)
+            gMediaSource.set($gPlaylist[idx][1][1]);
+    });
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <video
-    src={$gblSource.video}
+    src={$gMediaSource.video}
     type="video/mp4"
     preload="auto"
     bind:this={videoElem}
     on:canplay={() => {
-        if ($gblSource.video !== "") {
+        if ($gMediaSource.video !== "") {
             videoReady = true;
             allReady.set(videoReady && audioReady[0] && audioReady[1]);
         }
+    }}
+    on:ended={() => {
+        gCurrentPlayingIndex.set(
+            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length)
+        );
     }}
 />
 
 {#each [0, 1] as i}
     <audio
-        src={$gblSource.audio[i]}
+        src={$gMediaSource.audio[i]}
         type="audio/mp4"
         preload="auto"
         bind:this={audioElems[i]}
         on:canplay={() => {
-            if ($gblSource.audio[i] !== "") {
+            if ($gMediaSource.audio[i] !== "") {
                 audioReady[i] = true;
                 allReady.set(videoReady && audioReady[0] && audioReady[1]);
             }

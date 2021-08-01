@@ -3,10 +3,16 @@
     // import "bootstrap/dist/css/bootstrap.min.css";
     // import "bootstrap/dist/css/bootstrap.min.css.map";
     import { fade, slide } from "svelte/transition";
-    import { Singer, gblSource } from "./common";
+    import {
+        Singer,
+        gPlaylist,
+        gRightPanelVisible,
+        gCurrentPlayingIndex,
+    } from "./common";
 
     export let singer: Singer;
     let expanded = false;
+    const rightPanelFoldingDelay = 3000;
 
     function toggleExpansion() {
         expanded = !expanded;
@@ -25,7 +31,19 @@
     {#if expanded}
         <ul transition:slide={{ duration: 50 * singer.songs.length }}>
             {#each singer.songs as song}
-                <li on:click={() => gblSource.set(song[1])}>
+                <li
+                    on:click={() => {
+                        gPlaylist.set([...$gPlaylist, [singer.name, song]]);
+                        gRightPanelVisible.set(true);
+                        if ($gPlaylist.length == 1) {
+                            gCurrentPlayingIndex.set(0);
+                        }
+                        setTimeout(
+                            () => gRightPanelVisible.set(false),
+                            rightPanelFoldingDelay
+                        );
+                    }}
+                >
                     <div class="song-name">{song[0]}</div>
                 </li>
             {/each}

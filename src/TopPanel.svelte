@@ -1,34 +1,61 @@
 <script lang="typescript">
     import {
-        getDefaultVisibilityTweening,
-        createTweening,
-        gblTrack,
+        gTopPanelVisible,
+        getVisibilityTweening,
+        deriveTweening,
+        gAudioTrack,
+        gCurrentPlayingIndex,
+        gPlaylist,
     } from "./common";
 
     function toggleTrack() {
-        gblTrack.set(1 - $gblTrack);
+        gAudioTrack.set(1 - $gAudioTrack);
     }
 
-    const visibility = getDefaultVisibilityTweening(0);
-    const topTweening = createTweening(visibility, -30, 0);
-    const opacityTweening = createTweening(visibility, 0, 0.7);
+    const visibility = getVisibilityTweening(0);
+    const topTweening = deriveTweening(visibility, -20, 0);
+    const opacityTweening = deriveTweening(visibility, 0, 0.7);
+    gTopPanelVisible.subscribe((value) => visibility.set(+value));
 </script>
 
 <div
     class="panel"
-    on:mouseenter={() => visibility.set(1)}
-    on:mouseleave={() => visibility.set(0)}
+    on:mouseenter={() => gTopPanelVisible.set(true)}
+    on:mouseleave={() => gTopPanelVisible.set(false)}
     style="top:{$topTweening}px; opacity:{$opacityTweening}"
 >
     <table>
         <tr>
-            <td> <button name="button">⟨</button></td>
-            <td
-                ><button name="button" on:click={toggleTrack}
-                    >{$gblTrack == 0 ? "到伴奏" : "到原唱"}</button
+            <td>
+                <button
+                    name="button"
+                    disabled={$gCurrentPlayingIndex <= 0}
+                    on:click={() => {
+                        gCurrentPlayingIndex.set(
+                            Math.max($gCurrentPlayingIndex - 1, 0)
+                        );
+                    }}>⟨</button
                 ></td
             >
-            <td><button name="button">⟩</button></td>
+            <td
+                ><button name="button" on:click={toggleTrack}
+                    >{$gAudioTrack == 0 ? "放伴奏" : "放原唱"}</button
+                ></td
+            >
+            <td
+                ><button
+                    name="button"
+                    disabled={$gCurrentPlayingIndex >= $gPlaylist.length - 1}
+                    on:click={() => {
+                        gCurrentPlayingIndex.set(
+                            Math.min(
+                                $gCurrentPlayingIndex + 1,
+                                $gPlaylist.length - 1
+                            )
+                        );
+                    }}>⟩</button
+                ></td
+            >
         </tr>
     </table>
 </div>

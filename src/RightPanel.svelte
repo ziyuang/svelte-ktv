@@ -14,17 +14,21 @@
 
     const visibility = getVisibilityTweening(0);
     const rightTweening = deriveTweening(visibility, -250, 0);
-    const opacityTweening = deriveTweening(visibility, 0, 0.9);
+    const opacityTweening = deriveTweening(visibility, 0, 0.8);
     gRightPanelVisible.subscribe((value) => visibility.set(+value));
 
     function showPanel() {
-        gRightPanelVisible.set(true);
         gRightPanelFoldingDisabled.set(true);
         if ($gRightPanelFoldingTimerId >= 0)
             window.clearTimeout($gRightPanelFoldingTimerId);
+        gRightPanelVisible.set(true);
     }
     function hidePanel() {
-        window.setTimeout(() => gRightPanelVisible.set(false), 100);
+        if ($gRightPanelFoldingTimerId >= 0)
+            window.clearTimeout($gRightPanelFoldingTimerId);
+        gRightPanelFoldingTimerId.set(
+            window.setTimeout(() => gRightPanelVisible.set(false), 150)
+        );
         gRightPanelFoldingDisabled.set(false);
     }
 </script>
@@ -35,99 +39,106 @@
     on:mouseleave={hidePanel}
     style="right:{$rightTweening}px; opacity:{$opacityTweening}"
 >
-    <div class="panel">
-        <ul>
-            {#each $gPlaylist as playListItem, idx (playListItem.id)}
-                <li
-                    class={idx < $gCurrentPlayingIndex ? "played-item" : ""}
-                    transition:slide
-                    animate:flip={{ duration: (d) => 30 * Math.sqrt(d) }}
-                >
-                    <div class="playlist-item">
-                        <div class="playing-icon">
-                            {#if $gCurrentPlayingIndex === idx}
-                                🎵
-                            {/if}
-                        </div>
-                        <div class="singer-song-name">
-                            {`${playListItem.singer} - ${playListItem.song.name}`}
-                        </div>
-                        <div
-                            class={idx === $gCurrentPlayingIndex
-                                ? "prioritize-button-disabled"
-                                : "prioritize-button"}
-                            title={idx < $gCurrentPlayingIndex
-                                ? "再唱"
-                                : idx > $gCurrentPlayingIndex
-                                ? "优先"
-                                : ""}
-                            on:click|stopPropagation={() => {
-                                if (idx < $gCurrentPlayingIndex) {
+    {#if $gPlaylist.length > 0}
+        <div class="panel">
+            <ul>
+                {#each $gPlaylist as playListItem, idx (playListItem.id)}
+                    <li
+                        class={idx < $gCurrentPlayingIndex ? "played-item" : ""}
+                        transition:slide
+                        animate:flip={{ duration: (d) => 30 * Math.sqrt(d) }}
+                    >
+                        <div class="playlist-item">
+                            <div class="playing-icon">
+                                {#if $gCurrentPlayingIndex === idx}
+                                    🎵
+                                {/if}
+                            </div>
+                            <div
+                                class="singer-song-name"
+                                style={$gCurrentPlayingIndex === idx
+                                    ? "font-weight: bold;"
+                                    : ""}
+                            >
+                                {`${playListItem.singer} - ${playListItem.song.name}`}
+                            </div>
+                            <div
+                                class={idx === $gCurrentPlayingIndex
+                                    ? "prioritize-button-disabled"
+                                    : "prioritize-button"}
+                                title={idx < $gCurrentPlayingIndex
+                                    ? "再唱"
+                                    : idx > $gCurrentPlayingIndex
+                                    ? "优先"
+                                    : ""}
+                                on:click|stopPropagation={() => {
+                                    if (idx < $gCurrentPlayingIndex) {
+                                        gPlaylist.set([
+                                            ...$gPlaylist.slice(0, idx),
+                                            ...$gPlaylist.slice(
+                                                idx + 1,
+                                                $gCurrentPlayingIndex + 1
+                                            ),
+                                            $gPlaylist[idx],
+                                            ...$gPlaylist.slice(
+                                                $gCurrentPlayingIndex + 1
+                                            ),
+                                        ]);
+                                        gCurrentPlayingIndex.set(
+                                            $gCurrentPlayingIndex - 1
+                                        );
+                                    } else if (idx > $gCurrentPlayingIndex) {
+                                        gPlaylist.set([
+                                            ...$gPlaylist.slice(
+                                                0,
+                                                $gCurrentPlayingIndex + 1
+                                            ),
+                                            $gPlaylist[idx],
+                                            ...$gPlaylist.slice(
+                                                $gCurrentPlayingIndex + 1,
+                                                idx
+                                            ),
+                                            ...$gPlaylist.slice(idx + 1),
+                                        ]);
+                                    }
+                                }}
+                            >
+                                <span>
+                                    {#if idx < $gCurrentPlayingIndex}
+                                        ↺
+                                    {:else if idx > $gCurrentPlayingIndex}
+                                        ↑
+                                    {/if}
+                                </span>
+                            </div>
+                            <div
+                                class="delete-button"
+                                title="删除"
+                                on:click|stopPropagation={() => {
                                     gPlaylist.set([
                                         ...$gPlaylist.slice(0, idx),
-                                        ...$gPlaylist.slice(
-                                            idx + 1,
-                                            $gCurrentPlayingIndex + 1
-                                        ),
-                                        $gPlaylist[idx],
-                                        ...$gPlaylist.slice(
-                                            $gCurrentPlayingIndex + 1
-                                        ),
-                                    ]);
-                                    gCurrentPlayingIndex.set(
-                                        $gCurrentPlayingIndex - 1
-                                    );
-                                } else if (idx > $gCurrentPlayingIndex) {
-                                    gPlaylist.set([
-                                        ...$gPlaylist.slice(
-                                            0,
-                                            $gCurrentPlayingIndex + 1
-                                        ),
-                                        $gPlaylist[idx],
-                                        ...$gPlaylist.slice(
-                                            $gCurrentPlayingIndex + 1,
-                                            idx
-                                        ),
                                         ...$gPlaylist.slice(idx + 1),
                                     ]);
-                                }
-                            }}
-                        >
-                            <span>
-                                {#if idx < $gCurrentPlayingIndex}
-                                    ↺
-                                {:else if idx > $gCurrentPlayingIndex}
-                                    ↑
-                                {/if}
-                            </span>
+                                    if (idx < $gCurrentPlayingIndex) {
+                                        gCurrentPlayingIndex.set(
+                                            $gCurrentPlayingIndex - 1
+                                        );
+                                    } else if (idx == $gCurrentPlayingIndex) {
+                                        gMediaSource.set(
+                                            $gPlaylist[$gCurrentPlayingIndex]
+                                                .song.source
+                                        );
+                                    }
+                                }}
+                            >
+                                <span>╳</span>
+                            </div>
                         </div>
-                        <div
-                            class="delete-button"
-                            title="删除"
-                            on:click|stopPropagation={() => {
-                                gPlaylist.set([
-                                    ...$gPlaylist.slice(0, idx),
-                                    ...$gPlaylist.slice(idx + 1),
-                                ]);
-                                if (idx < $gCurrentPlayingIndex) {
-                                    gCurrentPlayingIndex.set(
-                                        $gCurrentPlayingIndex - 1
-                                    );
-                                } else if (idx == $gCurrentPlayingIndex) {
-                                    gMediaSource.set(
-                                        $gPlaylist[$gCurrentPlayingIndex].song
-                                            .source
-                                    );
-                                }
-                            }}
-                        >
-                            <span>╳</span>
-                        </div>
-                    </div>
-                </li>
-            {/each}
-        </ul>
-    </div>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -136,10 +147,10 @@
         position: absolute;
         width: 330px;
         height: 92vh;
-        top: 5px;
+        top: 10px;
         right: 0px;
         & div.panel {
-            opacity: 0.9;
+            opacity: 0.8;
             border-radius: 5px 0px 0px 5px;
             max-height: 92vh;
             overflow-y: auto;

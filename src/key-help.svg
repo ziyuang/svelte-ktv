@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="4.192802"
-     inkscape:cx="60.222257"
-     inkscape:cy="55.452177"
+     inkscape:cx="60.103005"
+     inkscape:cy="55.213673"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -334,29 +334,29 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="79.504555"
-       y="126.07664"
+       x="81.618576"
+       y="132.72762"
        id="text39212"><tspan
          sodipodi:role="line"
          id="tspan39210"
          style="font-size:1.41111px;stroke-width:0.264583px"
-         x="79.504555"
-         y="126.07664">歌曲控制</tspan></text>
+         x="81.618576"
+         y="132.72762">歌曲控制</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.05833px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="84.428612"
-       y="131.89232"
+       x="82.31459"
+       y="125.24134"
        id="text44938"><tspan
          sodipodi:role="line"
          id="tspan44936"
          style="font-size:1.05833px;text-align:center;text-anchor:middle;stroke-width:0.264583px"
-         x="84.428612"
-         y="131.89232">显示/隐藏</tspan><tspan
+         x="82.31459"
+         y="125.24134">显示/隐藏</tspan><tspan
          sodipodi:role="line"
          style="font-size:1.05833px;text-align:center;text-anchor:middle;stroke-width:0.264583px"
-         x="84.428612"
-         y="133.31813"
+         x="82.31459"
+         y="126.66715"
          id="tspan44940">所有面板</tspan></text>
     <g
        id="g40086"

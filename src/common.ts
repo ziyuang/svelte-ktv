@@ -32,7 +32,7 @@ export const gAudioTrack = writable(1);
 export const gPlaylist = writable<PlayListItem[]>([]);
 export const gCurrentPlayingIndex = writable(-1);
 export const gLeftPanelVisible = writable(true);
-export const gTopPanelVisible = writable(false);
+export const gBottomPanelVisible = writable(false);
 export const gRightPanelVisible = writable(false);
 export const gHelpPanelVisible = writable(true);
 

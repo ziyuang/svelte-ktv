@@ -25,7 +25,7 @@
     }
     function hidePanel() {
         if (timer >= 0) window.clearTimeout(timer);
-        timer = window.setTimeout(() => gLeftPanelVisible.set(false), 100);
+        timer = window.setTimeout(() => gLeftPanelVisible.set(false), 150);
     }
 </script>
 
@@ -42,11 +42,12 @@
 
 <style lang="scss">
     div.panel {
+        opacity: 0.7;
         border-radius: 0px 5px 5px 0px;
+        left: 0px;
         width: 230px;
         height: 92vh;
-        top: 5px;
+        top: 10px;
         overflow-y: auto;
-        left: 0px;
     }
 </style>

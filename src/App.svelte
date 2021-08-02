@@ -1,7 +1,7 @@
 <script lang="typescript">
     import {
         gLeftPanelVisible,
-        gTopPanelVisible,
+        gBottomPanelVisible,
         gRightPanelVisible,
         gHelpPanelVisible,
         gAudioTrack,
@@ -9,7 +9,7 @@
         gPlaylist,
         showThenHideRightPanel,
     } from "./common";
-    import TopPanel from "./TopPanel.svelte";
+    import BottomPanel from "./BottomPanel.svelte";
     import LeftPanel from "./LeftPanel.svelte";
     import RightPanel from "./RightPanel.svelte";
     import HelpPanel from "./HelpPanel.svelte";
@@ -41,7 +41,7 @@
                 gLeftPanelVisible.set(!$gLeftPanelVisible);
                 break;
             case "KeyW":
-                gTopPanelVisible.set(!$gTopPanelVisible);
+                gBottomPanelVisible.set(!$gBottomPanelVisible);
                 break;
             case "KeyD":
                 gRightPanelVisible.set(!$gRightPanelVisible);
@@ -49,15 +49,15 @@
             case "KeyS":
                 if (
                     $gLeftPanelVisible &&
-                    $gTopPanelVisible &&
+                    $gBottomPanelVisible &&
                     $gRightPanelVisible
                 ) {
                     gLeftPanelVisible.set(false);
-                    gTopPanelVisible.set(false);
+                    gBottomPanelVisible.set(false);
                     gRightPanelVisible.set(false);
                 } else {
                     gLeftPanelVisible.set(true);
-                    gTopPanelVisible.set(true);
+                    gBottomPanelVisible.set(true);
                     gRightPanelVisible.set(true);
                 }
                 break;
@@ -120,7 +120,7 @@
     }}
 />
 
-<TopPanel />
+<BottomPanel />
 <LeftPanel />
 <RightPanel />
 <HelpPanel />
@@ -135,6 +135,7 @@
 <style lang="scss">
     :global(body) {
         overflow-x: hidden;
+        overflow-y: hidden;
         background-color: floralwhite;
     }
     :global(div.panel) {
@@ -142,7 +143,7 @@
         z-index: 100;
         font-family: sans-serif;
         background-color: white;
-        opacity: 0.7;
+        border: 1px solid gray;
         // https://stackoverflow.com/a/42115371/688080
         &::-webkit-scrollbar {
             width: 12px;

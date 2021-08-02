@@ -32,11 +32,15 @@
     const opacityTweening = deriveTweening(visibility, 0, 0.7);
     gTopPanelVisible.subscribe((value) => visibility.set(+value));
 
+    let timer = -1;
+
     function showPanel() {
         gTopPanelVisible.set(true);
+        if (timer >= 0) window.clearTimeout(timer);
     }
     function hidePanel() {
-        window.setTimeout(() => gTopPanelVisible.set(false), 100);
+        if (timer >= 0) window.clearTimeout(timer);
+        timer = window.setTimeout(() => gTopPanelVisible.set(false), 100);
     }
 </script>
 

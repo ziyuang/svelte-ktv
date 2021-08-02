@@ -7,6 +7,7 @@
         gAudioTrack,
         gCurrentPlayingIndex,
         gPlaylist,
+        showThenHideRightPanel,
     } from "./common";
     import TopPanel from "./TopPanel.svelte";
     import LeftPanel from "./LeftPanel.svelte";
@@ -68,12 +69,16 @@
                 }
                 break;
             case "KeyQ":
-                if ($gCurrentPlayingIndex > 0)
+                if ($gCurrentPlayingIndex > 0) {
                     gCurrentPlayingIndex.set($gCurrentPlayingIndex - 1);
+                    showThenHideRightPanel();
+                }
                 break;
             case "KeyE":
-                if ($gCurrentPlayingIndex < $gPlaylist.length - 1)
+                if ($gCurrentPlayingIndex < $gPlaylist.length - 1) {
                     gCurrentPlayingIndex.set($gCurrentPlayingIndex + 1);
+                    showThenHideRightPanel();
+                }
                 break;
             case "KeyH":
                 gHelpPanelVisible.set(!$gHelpPanelVisible);

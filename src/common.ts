@@ -1,4 +1,4 @@
-import { writable, derived } from "svelte/store";
+import { writable, derived, get } from "svelte/store";
 import { tweened, Tweened } from "svelte/motion";
 
 export interface MediaSource {
@@ -19,6 +19,7 @@ export interface Singer {
 }
 
 export interface PlayListItem {
+    id: string;
     singer: string;
     song: Song;
 }
@@ -35,7 +36,20 @@ export const gTopPanelVisible = writable(false);
 export const gRightPanelVisible = writable(false);
 export const gHelpPanelVisible = writable(true);
 
-export const gRightPanelFoldingTimerIds = writable<number[]>([]);
+export const gRightPanelFoldingTimerId = writable<number>(-1);
+export const gRightPanelFoldingDisabled = writable(false);
+export function showThenHideRightPanel(delay: number = 3000) {
+    gRightPanelVisible.set(true);
+    const prevTimer = get(gRightPanelFoldingTimerId);
+    if (prevTimer >= 0) window.clearTimeout(prevTimer);
+    if (!get(gRightPanelFoldingDisabled)) {
+        const timer = window.setTimeout(
+            () => gRightPanelVisible.set(false),
+            delay
+        );
+        gRightPanelFoldingTimerId.set(timer);
+    }
+}
 
 export function getVisibilityTweening(defaultVisibility = 1) {
     return tweened(defaultVisibility, { duration: 100 });

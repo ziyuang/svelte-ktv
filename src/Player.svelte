@@ -6,6 +6,7 @@
         gPlaylist,
         gCurrentPlayingIndex,
         gHelpPanelVisible,
+        showThenHideRightPanel,
     } from "./common";
 
     let videoElem: HTMLVideoElement;
@@ -53,6 +54,7 @@
         gCurrentPlayingIndex.set(
             Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length)
         );
+        showThenHideRightPanel();
     }
 </script>
 

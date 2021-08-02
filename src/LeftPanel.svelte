@@ -13,15 +13,22 @@
     }
 
     const visibility = getVisibilityTweening();
-    const leftTweening = deriveTweening(visibility, -170, 0);
+    const leftTweening = deriveTweening(visibility, -200, 0);
     const opacityTweening = deriveTweening(visibility, 0, 0.7);
     gLeftPanelVisible.subscribe((value) => visibility.set(+value));
+
+    function showPanel() {
+        gLeftPanelVisible.set(true);
+    }
+    function hidePanel() {
+        window.setTimeout(() => gLeftPanelVisible.set(false), 100);
+    }
 </script>
 
 <div
     class="panel"
-    on:mouseenter={() => gLeftPanelVisible.set(true)}
-    on:mouseleave={() => gLeftPanelVisible.set(false)}
+    on:mouseenter={showPanel}
+    on:mouseleave={hidePanel}
     style="left:{$leftTweening}px; opacity:{$opacityTweening}"
 >
     {#await getRepo() then repo}
@@ -32,7 +39,7 @@
 <style lang="scss">
     div.panel {
         border-radius: 0px 5px 5px 0px;
-        width: 200px;
+        width: 230px;
         height: 92vh;
         top: 5px;
         overflow-y: auto;

@@ -1,14 +1,11 @@
 <script lang="typescript">
-    // import "bootstrap";
-    // import "bootstrap/dist/css/bootstrap.min.css";
-    // import "bootstrap/dist/css/bootstrap.min.css.map";
     import { fade, slide } from "svelte/transition";
     import {
         Singer,
         gPlaylist,
         gRightPanelVisible,
         gCurrentPlayingIndex,
-        gRightPanelFoldingTimerIds,
+        showThenHideRightPanel,
     } from "./common";
 
     export let singer: Singer;
@@ -36,20 +33,16 @@
                     on:click={() => {
                         gPlaylist.set([
                             ...$gPlaylist,
-                            { singer: singer.name, song: song },
+                            {
+                                id: `${singer.name}-${song.name}`,
+                                singer: singer.name,
+                                song: song,
+                            },
                         ]);
-                        gRightPanelVisible.set(true);
                         if ($gPlaylist.length == 1) {
                             gCurrentPlayingIndex.set(0);
                         }
-                        const timer = window.setTimeout(
-                            () => gRightPanelVisible.set(false),
-                            rightPanelFoldingDelay
-                        );
-                        gRightPanelFoldingTimerIds.set([
-                            ...$gRightPanelFoldingTimerIds,
-                            timer,
-                        ]);
+                        showThenHideRightPanel();
                     }}
                 >
                     <div class="song-name">{song.name}</div>

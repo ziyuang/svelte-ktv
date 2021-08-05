@@ -29,6 +29,7 @@
     }
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 <svelte:window
     on:keydown={(e) => {
         let refTime = 0;
@@ -138,23 +139,23 @@
         overflow-y: hidden;
         background-color: floralwhite;
     }
-    :global(div.panel) {
-        position: absolute;
-        z-index: 100;
-        font-family: sans-serif;
-        background-color: white;
-        border: 1px solid gray;
-        // https://stackoverflow.com/a/42115371/688080
-        &::-webkit-scrollbar {
-            width: 12px;
-        }
-        &::-webkit-scrollbar-track {
-            border-radius: 5px;
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-        &::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-        }
-    }
+    // :global(div.panel) {
+    //     position: absolute;
+    //     z-index: 100;
+    //     font-family: sans-serif;
+    //     background-color: white;
+    //     border: 1px solid gray;
+    //     // https://stackoverflow.com/a/42115371/688080
+    //     &::-webkit-scrollbar {
+    //         width: 12px;
+    //     }
+    //     &::-webkit-scrollbar-track {
+    //         border-radius: 5px;
+    //         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    //     }
+    //     &::-webkit-scrollbar-thumb {
+    //         border-radius: 5px;
+    //         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    //     }
+    // }
 </style>

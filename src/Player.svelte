@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { writable } from "svelte/store";
     import {
+        gVideoElement,
         gMediaSource,
         gAudioTrack,
         gPlaylist,
@@ -35,6 +36,7 @@
             gHelpPanelVisible.set(false);
         }
         mediaElems = [videoElem, audioElems[0], audioElems[1]];
+        gVideoElement.set(videoElem)
     });
 
     gMediaSource.subscribe(() => {

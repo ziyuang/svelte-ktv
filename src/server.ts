@@ -20,23 +20,25 @@ function createRepo(root: string): Singer[] {
         if (file.isFile() && file.name.endsWith(".mp4")) {
             const m = regex.exec(file.name);
             if (m) {
-                let singer = m[1];
-                let song = m[2];
-                if (!(singer in repo)) {
-                    repo[singer] = {};
-                }
-                if (!(song in repo[singer])) {
-                    repo[singer][song] = { video: "", audio: ["", ""] };
-                }
-                const filePath = `${root}/${file.name}`;
-                if (/video/.exec(file.name)) {
-                    repo[singer][song].video = filePath;
-                } else if (/vocal/.exec(file.name)) {
-                    repo[singer][song].audio[0] = filePath;
-                } else if (/instrumental/.exec(file.name)) {
-                    repo[singer][song].audio[1] = filePath;
-                } else {
-                    assert(false, `Unknown track: ${filePath}`);
+                let singers = m[1].split("、");
+                for (const singer of singers) {
+                    let song = m[2];
+                    if (!(singer in repo)) {
+                        repo[singer] = {};
+                    }
+                    if (!(song in repo[singer])) {
+                        repo[singer][song] = { video: "", audio: ["", ""] };
+                    }
+                    const filePath = `${root}/${file.name}`;
+                    if (/video/.exec(file.name)) {
+                        repo[singer][song].video = filePath;
+                    } else if (/vocal/.exec(file.name)) {
+                        repo[singer][song].audio[0] = filePath;
+                    } else if (/instrumental/.exec(file.name)) {
+                        repo[singer][song].audio[1] = filePath;
+                    } else {
+                        assert(false, `Unknown track: ${filePath}`);
+                    }
                 }
             }
         }
@@ -70,7 +72,7 @@ app.get("/videos", (req: express.Request, res: express.Response) =>
 );
 app.use(express.static("."));
 
-const PORT = 3000;
+const PORT = 80;
 const ADDR = ip.address();
 app.listen(PORT, () =>
     console.log(`Server listening at http://${ADDR}:${PORT}`)

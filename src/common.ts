@@ -6,8 +6,6 @@ export interface MediaSource {
     audio: [string, string]; // vocal, instrumental
 }
 
-// export type Song = [string, MediaSource]; // [song name, source]
-
 export interface Song {
     name: string;
     source: MediaSource;
@@ -28,10 +26,20 @@ export const gMediaSource = writable<MediaSource>({
     video: "",
     audio: ["", ""],
 });
+
+export enum PanelLocation {
+    Bottom,
+    Left,
+    Middle,
+    Right,
+}
+
+export const gVideoElement = writable<HTMLVideoElement | undefined>(undefined);
+
 export const gAudioTrack = writable(1);
 export const gPlaylist = writable<PlayListItem[]>([]);
 export const gCurrentPlayingIndex = writable(-1);
-export const gLeftPanelVisible = writable(true);
+export const gLeftPanelVisible = writable(false);
 export const gBottomPanelVisible = writable(false);
 export const gRightPanelVisible = writable(false);
 export const gHelpPanelVisible = writable(true);
@@ -51,7 +59,7 @@ export function showThenHideRightPanel(delay: number = 3000) {
     }
 }
 
-export function getVisibilityTweening(defaultVisibility = 1) {
+export function getVisibilityTweening(defaultVisibility = 0) {
     return tweened(defaultVisibility, { duration: 100 });
 }
 export function deriveTweening(

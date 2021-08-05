@@ -17,6 +17,7 @@
     // const records = flatten(repo);
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 <div>
     {#each repo as singer}
         <SingerView {singer} />

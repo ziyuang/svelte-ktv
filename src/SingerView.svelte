@@ -3,20 +3,19 @@
     import {
         Singer,
         gPlaylist,
-        gRightPanelVisible,
         gCurrentPlayingIndex,
         showThenHideRightPanel,
     } from "./common";
 
     export let singer: Singer;
     let expanded = false;
-    const rightPanelFoldingDelay = 3000;
 
     function toggleExpansion() {
         expanded = !expanded;
     }
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 <div class="singer">
     <div class="singer-name" on:click={toggleExpansion}>
         <div class="singer-name-icon">

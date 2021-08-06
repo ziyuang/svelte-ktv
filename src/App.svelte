@@ -41,13 +41,13 @@
             case "KeyA":
                 gLeftPanelVisible.set(!$gLeftPanelVisible);
                 break;
-            case "KeyW":
+            case "KeyS":
                 gBottomPanelVisible.set(!$gBottomPanelVisible);
                 break;
             case "KeyD":
                 gRightPanelVisible.set(!$gRightPanelVisible);
                 break;
-            case "KeyS":
+            case "KeyW":
                 if (
                     $gLeftPanelVisible &&
                     $gBottomPanelVisible &&

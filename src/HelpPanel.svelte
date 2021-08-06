@@ -9,6 +9,7 @@
         <div class="caption">快捷键</div>
         <img class="key-help" src="key-help.svg" alt="key shortcuts" />
     </Panel>
+    <img class="arrows" src="arrows.svg" alt="key shortcuts" />
 {/if}
 
 <style lang="scss">
@@ -23,5 +24,12 @@
         width: auto;
         height: 100%;
         vertical-align: middle;
+    }
+    img.arrows {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
     }
 </style>

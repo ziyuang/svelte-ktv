@@ -1,15 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg width="1366" height="561.52588" viewBox="0 0 361.42083 148.57039" version="1.1" id="svg1794" xmlns="http://www.w3.org/2000/svg">
-  <g id="layer1" transform="translate(-52.684625,-131.38931)">
-    <g id="g19446" transform="matrix(3.8707628,0,0,3.8707628,-151.24504,-377.1875)">
-      <path id="rect521" style="fill:none;stroke:#7f7f00;stroke-width:0.11088;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1" d="m 56.866421,131.44473 -4.126364,4.0199 4.126364,4.01991 v -2.4107 h 12.294856 v -3.21841 H 56.866421 Z"/>
-      <text style="font-style: normal; font-weight: normal; font-size: 1.41111px; line-height: 125%; font-family: sans-serif; letter-spacing: 0px; word-spacing: 0px; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; stroke-width: 0.264583px; stroke-linecap: butt; stroke-linejoin: miter; stroke-opacity: 1; white-space: pre;" x="61.53384" y="135.96339" id="text3775"><tspan id="tspan3773" style="font-size:1.41111px;stroke-width:0.264583px" x="61.53384" y="135.96339">曲库</tspan></text>
-    </g>
-    <path id="path19776" style="fill:none;stroke:#7f7f00;stroke-width:1.62214;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1" d="M 659.29102 400.3125 L 659.29102 477.16602 L 659.45703 477.16602 L 659.45703 500.34766 L 624.18945 500.34766 L 683 560.71484 L 741.81055 500.34766 L 706.54297 500.34766 L 706.54297 477.16602 L 706.70898 477.16602 L 706.70898 400.3125 L 659.29102 400.3125 z " transform="matrix(0.26458333,0,0,0.26458333,52.684625,131.38931)"/>
-    <g id="g14559" transform="matrix(3.8707628,0,0,3.8707628,-45.113598,-358.43397)">
-      <path id="rect521-6" style="fill:none;stroke:#7f7f00;stroke-width:0.415786;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1" d="m 181.57422,36.601562 v 9.039063 H 135.4707 v 12.068359 h 46.10352 v 9.039063 l 15.47266,-15.074219 z" transform="matrix(0.26458333,0,0,0.26458333,66.447548,116.94742)"/>
-      <text style="font-style: normal; font-weight: normal; font-size: 1.41111px; line-height: 125%; font-family: sans-serif; letter-spacing: 0px; word-spacing: 0px; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; stroke-width: 0.264583px; stroke-linecap: butt; stroke-linejoin: miter; stroke-opacity: 1; white-space: pre;" x="105.59624" y="131.12021" id="text9622"><tspan id="tspan9620" style="font-size:1.41111px;stroke-width:0.264583px" x="105.59624" y="131.12021">播放列表</tspan></text>
-    </g>
-    <text id="text3775-0" style="font-style: normal; font-weight: normal; font-size: 5.46207px; line-height: 125%; font-family: sans-serif; letter-spacing: 0px; word-spacing: 0px; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; stroke-width: 1.02414px; stroke-linecap: butt; stroke-linejoin: miter; stroke-opacity: 1; white-space: pre;" x="225.538" y="250.529"><tspan id="tspan3773-6" style="font-size: 5.5px; writing-mode: tb-rl; stroke-width: 1.02414px; word-spacing: 0px;" x="233.426" y="242.641">歌曲控制</tspan></text>
-  </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1366"
+   height="561.52588"
+   viewBox="0 0 361.42083 148.57039"
+   version="1.1"
+   id="svg1794"
+   sodipodi:docname="arrows.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs17" />
+  <sodipodi:namedview
+     id="namedview15"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.77452416"
+     inkscape:cx="682.35444"
+     inkscape:cy="280.81758"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1794" />
+  <path
+     id="path19776"
+     style="fill:#7f7f00;stroke:#7f7f00;stroke-width:0.429191;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1;fill-opacity:0.5"
+     d="m 174.43741,105.91601 v 20.33416 h 0.0439 v 6.13348 h -9.33122 l 15.56029,15.97215 15.5603,-15.97215 h -9.33122 v -6.13348 h 0.0439 v -20.33416 z" />
+  <path
+     id="rect521-6"
+     style="fill:#7f7f00;stroke:#7f7f00;stroke-width:0.425823;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1;fill-opacity:0.5"
+     d="M 345.36176,0.33754109 V 9.5948007 H 298.14534 V 21.954481 h 47.21642 v 9.25726 l 15.84616,-15.4381 z" />
+  <path
+     id="rect521"
+     style="fill:#7f7f00;stroke:#7f7f00;stroke-width:0.42919;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:none;stroke-opacity:1;fill-opacity:0.5"
+     d="M 16.186767,0.21456114 0.21459071,15.774641 16.186767,31.334759 V 22.003511 H 63.777238 V 9.545809 H 16.186767 Z" />
+  <text
+     id="text3775-0"
+     style="font-style:normal;font-weight:normal;font-size:5.46207px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.02414px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="172.85336"
+     y="119.13969"><tspan
+       id="tspan3773-6"
+       style="font-size:5.5px;word-spacing:0px;writing-mode:tb-rl;stroke-width:1.02414px"
+       x="180.74136"
+       y="111.25169">歌曲控制</tspan></text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:5.46207px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.02414px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="34.253239"
+     y="17.705238"
+     id="text3775"><tspan
+       id="tspan3773"
+       style="font-size:5.46207px;stroke-width:1.02414px"
+       x="34.253239"
+       y="17.705238">曲库</tspan></text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:5.46207px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.02414px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="310.93976"
+     y="17.711946"
+     id="text9622"><tspan
+       id="tspan9620"
+       style="font-size:5.46207px;stroke-width:1.02414px"
+       x="310.93976"
+       y="17.711946">播放列表</tspan></text>
 </svg>

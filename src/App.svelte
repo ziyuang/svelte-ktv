@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from "svelte";
     import {
         gLeftPanelVisible,
         gBottomPanelVisible,
@@ -16,6 +17,7 @@
     import Player from "./Player.svelte";
 
     let mediaElems: HTMLMediaElement[];
+    let cheerElem: HTMLAudioElement;
     let isPaused = false;
 
     function togglePause() {
@@ -84,6 +86,9 @@
                     case "KeyH":
                         gHelpPanelVisible.set(!$gHelpPanelVisible);
                         break;
+                    case "KeyC":
+                        cheerElem.play();
+                        break;
                     case "ArrowLeft":
                         refTime = mediaElems[0].currentTime;
                         for (const elem of mediaElems) {
@@ -115,15 +120,21 @@
                         }
                         break;
                     case "Digit1":
+                    case "Numpad1":
                         gAudioTrack.set(0);
                         break;
                     case "Digit2":
+                    case "Numpad2":
                         gAudioTrack.set(1);
                         break;
                 }
             }
         }
     }
+
+    onMount(() => {
+        cheerElem.volume = 0.2;
+    });
 </script>
 
 <svelte:window on:keydown={handleHotKeys} />
@@ -139,6 +150,7 @@
 >
     <Player bind:mediaElems />
 </div>
+<audio bind:this={cheerElem} src="/cheer.mp3" />
 
 <style lang="scss">
     :global(body) {

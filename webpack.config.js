@@ -178,6 +178,10 @@ const clientConfig = {
                 {
                     from: "*.svg",
                     to: path.resolve(__dirname, "dist")
+                },
+                {
+                    from: "*.mp3",
+                    to: path.resolve(__dirname, "dist")
                 }
             ]
         })

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { writable, Writable, Readable, get } from "svelte/store";
+    import { writable, Writable, Readable } from "svelte/store";
     import { fade } from "svelte/transition";
     import {
         PanelLocation,
@@ -17,7 +17,9 @@
     export let location: PanelLocation;
     export let panelWidth: number;
     export let panelHeight: number;
+    export let autoHidePanel = true;
 
+    let panelElem: HTMLElement;
     const containerMargin = 30;
 
     let panelTop = writable(-1);
@@ -54,6 +56,13 @@
 
     const foldingDelay = 200;
     let timer = -1;
+    function blurPanel() {
+        if ($gVideoElement) {
+            $gVideoElement.focus();
+        } else if (panelElem) {
+            panelElem.blur();
+        }
+    }
     let showPanel = (panelVisible: Writable<boolean>) => {
         return () => {
             panelVisible.set(true);
@@ -67,7 +76,7 @@
                 () => panelVisible.set(false),
                 foldingDelay
             );
-            if ($gVideoElement) $gVideoElement.focus();
+            blurPanel();
         };
     };
 
@@ -81,7 +90,7 @@
             panelFoldingTweening = deriveTweening(
                 visibility,
                 -containerHeight + containerMargin,
-                containerBottom
+                containerBottom - 1
             );
             locationTweeningStyleName = "bottom";
             containerStyle = `
@@ -109,7 +118,7 @@
             panelFoldingTweening = deriveTweening(
                 visibility,
                 -containerWidth + containerMargin,
-                containerLeft
+                containerLeft - 1
             );
             locationTweeningStyleName = "left";
             containerStyle = `
@@ -131,7 +140,7 @@
             panelFoldingTweening = deriveTweening(
                 visibility,
                 -containerWidth + containerMargin,
-                containerRight
+                containerRight - 1
             );
             showPanel = (panelVisible: Writable<boolean>) => {
                 return () => {
@@ -152,7 +161,7 @@
                         )
                     );
                     gRightPanelFoldingDisabled.set(false);
-                    $gVideoElement.focus();
+                    blurPanel();
                 };
             };
             locationTweeningStyleName = "right";
@@ -195,8 +204,8 @@
     function noop() {}
 </script>
 
-<!-- svelte-ignore missing-declaration -->
 <div
+    bind:this={panelElem}
     class="panel-container"
     style={containerStyle +
         (location == PanelLocation.Middle
@@ -208,12 +217,8 @@
         "opacity: " +
         $opacityTweening +
         ";"}
-    on:mouseenter={location == PanelLocation.Middle
-        ? noop
-        : showPanel(panelVisible)}
-    on:mouseleave={location == PanelLocation.Middle
-        ? noop
-        : hidePanel(panelVisible)}
+    on:mouseenter={autoHidePanel ? showPanel(panelVisible) : noop}
+    on:mouseleave={autoHidePanel ? hidePanel(panelVisible) : noop}
     transition:fade={{ duration: 100 }}
 >
     <div class="panel" style={panelStyle}>
@@ -225,8 +230,8 @@
     div.panel-container {
         position: absolute;
         background-color: transparent;
+        z-index: 100;
         & div.panel {
-            z-index: 100;
             font-family: sans-serif;
             background-color: white;
             border: 1px solid gray;

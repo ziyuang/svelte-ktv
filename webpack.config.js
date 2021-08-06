@@ -16,7 +16,8 @@ const preprocess = require("svelte-preprocess");
 const path = require("path");
 const DEV_PORT = 5000;
 
-const mode = process.env.NODE_ENV || "development";
+// const mode = process.env.NODE_ENV || "development";
+const mode = "development";
 const prod = mode === "production";
 const shouldUseSourceMap = !prod;
 const publicPath = "/";

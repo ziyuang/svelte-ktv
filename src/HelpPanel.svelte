@@ -5,7 +5,7 @@
 
 <!-- svelte-ignore missing-declaration -->
 {#if $gHelpPanelVisible}
-    <Panel location={PanelLocation.Middle} panelWidth={500} panelHeight={500}>
+    <Panel location={PanelLocation.Middle} panelWidth={500} panelHeight={500} autoHidePanel={false}>
         <div class="caption">快捷键</div>
         <img class="key-help" src="key-help.svg" alt="key shortcuts" />
     </Panel>
@@ -30,6 +30,7 @@
         top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 70%;
+        width: 1340px;
+        z-index: 50;
     }
 </style>

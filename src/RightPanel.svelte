@@ -123,7 +123,6 @@
         padding-left: 15px;
         padding-right: 10px;
         & li {
-            list-style-type: none;
             margin-top: 5px;
             margin-bottom: 5px;
             &:hover {

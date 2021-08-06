@@ -35,7 +35,7 @@ export enum PanelLocation {
 }
 
 export const gVideoElement = writable<HTMLVideoElement | undefined>(undefined);
-
+export const gSearchString = writable("");
 export const gAudioTrack = writable(1);
 export const gPlaylist = writable<PlayListItem[]>([]);
 export const gCurrentPlayingIndex = writable(-1);

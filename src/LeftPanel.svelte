@@ -27,7 +27,7 @@
             on:keydown={blockSpecialChar}
             on:input={updateSearchString}
             type="search"
-            placeholder="搜歌"
+            placeholder="搜索"
         />
         <div
             style={$gSearchString.length == 0
@@ -50,7 +50,7 @@
     input {
         margin-top: 15px;
         margin-left: 30px;
-        width: 190px;
+        width: 210px;
         height: 25px;
     }
 </style>

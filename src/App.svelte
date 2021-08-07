@@ -150,7 +150,7 @@
 >
     <Player bind:mediaElems />
 </div>
-<audio bind:this={cheerElem} src="/cheer.mp3" />
+<audio bind:this={cheerElem} src="/cheer.mp3" type="audio/mp3" />
 
 <style lang="scss">
     :global(body) {

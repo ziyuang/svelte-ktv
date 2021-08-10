@@ -9,6 +9,8 @@
         gCurrentPlayingIndex,
         gPlaylist,
         showThenHideRightPanel,
+        syncMedia,
+        gVideoElement,
     } from "./common";
     import BottomPanel from "./BottomPanel.svelte";
     import LeftPanel from "./LeftPanel.svelte";
@@ -16,6 +18,7 @@
     import HelpPanel from "./HelpPanel.svelte";
     import Player from "./Player.svelte";
 
+    // let body: HTMLElement;
     let mediaElems: HTMLMediaElement[];
     let cheerElem: HTMLAudioElement;
     let isPaused = false;
@@ -24,17 +27,25 @@
         isPaused = !isPaused;
         for (const elem of mediaElems) {
             if (elem) {
-                if (isPaused) elem.pause();
-                else elem.play();
+                window.setTimeout(() => {
+                    {
+                        if (isPaused) elem.pause();
+                        else elem.play();
+                    }
+                }, 0);
             }
         }
+    }
+
+    function toggleFullscreen() {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen();
     }
 
     function handleHotKeys(e: KeyboardEvent) {
         {
             const targetNode: HTMLElement = e.target as HTMLElement;
             if (targetNode.nodeName.toLowerCase() !== "input") {
-                let refTime = 0;
                 const navStep = 10;
                 switch (e.code) {
                     case "Space":
@@ -90,34 +101,21 @@
                         cheerElem.play();
                         break;
                     case "ArrowLeft":
-                        refTime = mediaElems[0].currentTime;
-                        for (const elem of mediaElems) {
-                            if (elem) {
-                                elem.currentTime = Math.max(
-                                    refTime - navStep,
-                                    0
-                                );
-                            }
-                        }
+                        syncMedia(mediaElems, -navStep);
                         break;
                     case "ArrowRight":
-                        refTime = mediaElems[0].currentTime;
-                        for (const elem of mediaElems) {
-                            if (elem) {
-                                elem.currentTime = Math.min(
-                                    refTime + navStep,
-                                    elem.duration
-                                );
-                            }
-                        }
+                        syncMedia(mediaElems, navStep);
+                        break;
+                    case "Comma":
+                        if (e.shiftKey)
+                            syncMedia(mediaElems, -10 * navStep);
+                        break;
+                    case "Period":
+                        if (e.shiftKey)
+                            syncMedia(mediaElems, 10 * navStep);
                         break;
                     case "ArrowDown":
-                        refTime = mediaElems[0].currentTime;
-                        for (const elem of mediaElems) {
-                            if (elem) {
-                                elem.currentTime = refTime;
-                            }
-                        }
+                        syncMedia(mediaElems);
                         break;
                     case "Digit1":
                     case "Numpad1":
@@ -127,8 +125,35 @@
                     case "Numpad2":
                         gAudioTrack.set(1);
                         break;
+                    case "F11":
+                        e.preventDefault();
+                        toggleFullscreen();
+                        break;
+                    case "KeyL":
+                        if (e.altKey) toggleFullscreen();
+                        break;
+                    case "Enter":
+                    case "NumpadEnter":
+                        if (e.ctrlKey) toggleFullscreen();
+                        break;
                 }
             }
+        }
+    }
+
+    let fullscreenTimerId: number;
+    function showCursor() {
+        if ($gVideoElement) {
+            if (document.fullscreenElement) {
+                window.clearTimeout(fullscreenTimerId);
+                const hideCursorDelay = 3000;
+                fullscreenTimerId = window.setTimeout(
+                    () => ($gVideoElement.style.cursor = "none"),
+                    hideCursorDelay
+                );
+                console.log(fullscreenTimerId);
+            }
+            $gVideoElement.style.cursor = "default";
         }
     }
 
@@ -137,7 +162,11 @@
     });
 </script>
 
-<svelte:window on:keydown={handleHotKeys} />
+<svelte:window
+    on:keydown={handleHotKeys}
+    on:mousemove={showCursor}
+    on:fullscreenchange={showCursor}
+/>
 
 <BottomPanel />
 <LeftPanel />

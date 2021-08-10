@@ -55,7 +55,7 @@
     let panelFoldingTweening: Readable<number>;
 
     const foldingDelay = 200;
-    let timer = -1;
+
     function blurPanel() {
         if ($gVideoElement) {
             $gVideoElement.focus();
@@ -63,16 +63,18 @@
             panelElem.blur();
         }
     }
+
+    let timerId: number;
     let showPanel = (panelVisible: Writable<boolean>) => {
         return () => {
             panelVisible.set(true);
-            if (timer >= 0) window.clearTimeout(timer);
+            window.clearTimeout(timerId);
         };
     };
     let hidePanel = (panelVisible: Writable<boolean>) => {
         return () => {
-            if (timer >= 0) window.clearTimeout(timer);
-            timer = window.setTimeout(
+            window.clearTimeout(timerId);
+            timerId = window.setTimeout(
                 () => panelVisible.set(false),
                 foldingDelay
             );
@@ -145,15 +147,13 @@
             showPanel = (panelVisible: Writable<boolean>) => {
                 return () => {
                     gRightPanelFoldingDisabled.set(true);
-                    if ($gRightPanelFoldingTimerId >= 0)
-                        window.clearTimeout($gRightPanelFoldingTimerId);
+                    window.clearTimeout($gRightPanelFoldingTimerId);
                     panelVisible.set(true);
                 };
             };
             hidePanel = (panelVisible: Writable<boolean>) => {
                 return () => {
-                    if ($gRightPanelFoldingTimerId >= 0)
-                        window.clearTimeout($gRightPanelFoldingTimerId);
+                    window.clearTimeout($gRightPanelFoldingTimerId);
                     gRightPanelFoldingTimerId.set(
                         window.setTimeout(
                             () => panelVisible.set(false),

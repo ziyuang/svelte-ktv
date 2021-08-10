@@ -22,17 +22,17 @@ export interface PlayListItem {
     song: Song;
 }
 
-export const gMediaSource = writable<MediaSource>({
-    video: "",
-    audio: ["", ""],
-});
-
 export enum PanelLocation {
     Bottom,
     Left,
     Middle,
     Right,
 }
+
+export const gMediaSource = writable<MediaSource>({
+    video: "",
+    audio: ["", ""],
+});
 
 export const gVideoElement = writable<HTMLVideoElement | undefined>(undefined);
 export const gSearchString = writable("");
@@ -59,8 +59,8 @@ export function showThenHideRightPanel(delay: number = 3000) {
     }
 }
 
-export function getVisibilityTweening(defaultVisibility = 0) {
-    return tweened(defaultVisibility, { duration: 100 });
+export function getVisibilityTweening(defaultVisibility = 0, duration = 100) {
+    return tweened(defaultVisibility, { duration: duration });
 }
 export function deriveTweening(
     visibility: Tweened<number>,
@@ -71,4 +71,20 @@ export function deriveTweening(
         visibility,
         ($visibility) => (1 - $visibility) * min + $visibility * max
     );
+}
+
+export function syncMedia(
+    mediaElems: HTMLMediaElement[],
+    offset: number = 0,
+    sync: boolean = false
+) {
+    const refElem = mediaElems[mediaElems.length - 1];
+    const refTime = Math.max(
+        Math.min(refElem.currentTime + offset, refElem.duration),
+        0
+    );
+    for (let i = 0; i < mediaElems.length; i++) {
+        if (sync) mediaElems[i].currentTime = refTime;
+        else window.setTimeout(() => (mediaElems[i].currentTime = refTime), 0);
+    }
 }

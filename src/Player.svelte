@@ -36,7 +36,7 @@
             gHelpPanelVisible.set(false);
         }
         mediaElems = [videoElem, audioElems[0], audioElems[1]];
-        gVideoElement.set(videoElem)
+        gVideoElement.set(videoElem);
     });
 
     gMediaSource.subscribe(() => {
@@ -54,7 +54,7 @@
 
     function playNext() {
         gCurrentPlayingIndex.set(
-            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length)
+            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length - 1)
         );
         showThenHideRightPanel();
     }

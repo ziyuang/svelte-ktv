@@ -4,6 +4,7 @@
         Singer,
         gPlaylist,
         gCurrentPlayingIndex,
+        gVideoElement,
         showThenHideRightPanel,
     } from "./common";
 
@@ -40,6 +41,11 @@
                         ]);
                         if ($gPlaylist.length == 1) {
                             gCurrentPlayingIndex.set(0);
+                        } else if (
+                            $gVideoElement.ended &&
+                            $gCurrentPlayingIndex == $gPlaylist.length - 2
+                        ) {
+                            gCurrentPlayingIndex.set($gPlaylist.length - 1);
                         }
                         showThenHideRightPanel();
                     }}

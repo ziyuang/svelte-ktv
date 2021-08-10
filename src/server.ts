@@ -64,6 +64,7 @@ function createRepo(root: string): Singer[] {
 }
 
 const app = express();
+const expressWs = require("express-ws")(app);
 app.get("/", function (req: express.Request, res: express.Response) {
     res.sendFile("index.html", { root: "." });
 });

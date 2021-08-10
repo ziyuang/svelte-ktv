@@ -101,18 +101,11 @@
                         cheerElem.play();
                         break;
                     case "ArrowLeft":
-                        syncMedia(mediaElems, -navStep);
+                        const multiplier = e.ctrlKey ? 10 : 1;
+                        syncMedia(mediaElems, -multiplier * navStep);
                         break;
                     case "ArrowRight":
-                        syncMedia(mediaElems, navStep);
-                        break;
-                    case "Comma":
-                        if (e.shiftKey)
-                            syncMedia(mediaElems, -10 * navStep);
-                        break;
-                    case "Period":
-                        if (e.shiftKey)
-                            syncMedia(mediaElems, 10 * navStep);
+                        syncMedia(mediaElems, multiplier * navStep);
                         break;
                     case "ArrowDown":
                         syncMedia(mediaElems);

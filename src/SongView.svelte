@@ -7,6 +7,8 @@
         gPlaylist,
         showThenHideRightPanel,
         desktopOrMobile,
+        isMobile,
+        socket,
     } from "./common";
 
     export let repo: Singer[];
@@ -44,15 +46,19 @@
             <li
                 class={$desktopOrMobile}
                 on:click={() => {
-                    gPlaylist.set([
-                        ...$gPlaylist,
-                        {
-                            id: songInfo[1].id,
-                            singer: songInfo[1].singer,
-                            song: songInfo[1].song,
-                        },
-                    ]);
-                    showThenHideRightPanel();
+                    const selectedItem = {
+                        id: songInfo[1].id,
+                        singer: songInfo[1].singer,
+                        song: songInfo[1].song,
+                    };
+                    if (isMobile) {
+                        if (socket.readyState == 1) {
+                            socket.send(JSON.stringify(selectedItem));
+                        }
+                    } else {
+                        gPlaylist.set([...$gPlaylist, selectedItem]);
+                        showThenHideRightPanel();
+                    }
                 }}
             >
                 {songInfo[0]}

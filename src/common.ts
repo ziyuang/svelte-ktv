@@ -95,7 +95,7 @@ export const repoPromise: Promise<Singer[]> = (async () => {
 })();
 
 export const isMobile =
-    // "ontouchstart" in document.documentElement &&
+    "ontouchstart" in document.documentElement &&
     /mobi/i.test(navigator.userAgent);
-
 export const desktopOrMobile = readable(isMobile ? "mobile" : "desktop");
+export const socket = new WebSocket(`ws://${window.location.host}`);

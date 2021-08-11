@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { writable } from "svelte/store";
     import {
+        PlayListItem,
         gVideoElement,
         gMediaSource,
         gAudioTrack,
@@ -8,6 +9,7 @@
         gCurrentPlayingIndex,
         gHelpPanelVisible,
         showThenHideRightPanel,
+        socket,
     } from "./common";
 
     let videoElem: HTMLVideoElement;
@@ -70,6 +72,13 @@
         );
         showThenHideRightPanel();
     }
+
+    // as long as not in App and not contained in LeftPanelContent
+    socket.onmessage = function (e: MessageEvent) {
+        const playListItem: PlayListItem = JSON.parse(e.data);
+        gPlaylist.set([...$gPlaylist, playListItem]);
+        showThenHideRightPanel();
+    };
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->

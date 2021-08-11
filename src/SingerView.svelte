@@ -6,16 +6,15 @@
         showThenHideRightPanel,
         isMobile,
         desktopOrMobile,
+        socket,
     } from "./common";
 
     export let singer: Singer;
-    let expanded = false;
 
+    let expanded = false;
     function toggleExpansion() {
         expanded = !expanded;
     }
-
-    const ws = new WebSocket("localhost");
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -37,15 +36,19 @@
                 <li
                     class={$desktopOrMobile}
                     on:click={() => {
-                        gPlaylist.set([
-                            ...$gPlaylist,
-                            {
-                                id: `${singer.name}-${song.name}`,
-                                singer: singer.name,
-                                song: song,
-                            },
-                        ]);
-                        showThenHideRightPanel();
+                        const selectedItem = {
+                            id: `${singer.name}-${song.name}`,
+                            singer: singer.name,
+                            song: song,
+                        };
+                        if (isMobile) {
+                            if (socket.readyState == 1) {
+                                socket.send(JSON.stringify(selectedItem));
+                            }
+                        } else {
+                            gPlaylist.set([...$gPlaylist, selectedItem]);
+                            showThenHideRightPanel();
+                        }
                     }}
                 >
                     <div class="song-name">{song.name}</div>
@@ -65,7 +68,7 @@
 
     div.singer-name {
         margin-top: 15px;
-        margin-bottom: 15px;
+        // margin-bottom: 15px;
     }
 
     div.desktop {

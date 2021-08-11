@@ -1,6 +1,9 @@
 # Screenshots
+## Desktop
 ![screenshot1](screenshot1.png)
 ![screenshot2](screenshot2.png)
+## Mobile (for song-adding only)
+![mobile_screenshot](mobile_screenshot.jpg)
 
 # Build
 `yarn install && npx webpack build`

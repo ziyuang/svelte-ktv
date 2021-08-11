@@ -1,4 +1,4 @@
-import { writable, derived, get } from "svelte/store";
+import { readable, writable, derived, get } from "svelte/store";
 import { tweened, Tweened } from "svelte/motion";
 
 export interface MediaSource {
@@ -88,3 +88,14 @@ export function syncMedia(
         else window.setTimeout(() => (mediaElems[i].currentTime = refTime), 0);
     }
 }
+
+export const repoPromise: Promise<Singer[]> = (async () => {
+    const res = await fetch("/videos");
+    return res.json();
+})();
+
+export const isMobile =
+    // "ontouchstart" in document.documentElement &&
+    /mobi/i.test(navigator.userAgent);
+
+export const desktopOrMobile = readable(isMobile ? "mobile" : "desktop");

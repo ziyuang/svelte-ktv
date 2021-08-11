@@ -8,9 +8,10 @@
         gAudioTrack,
         gCurrentPlayingIndex,
         gPlaylist,
+        gVideoElement,
         showThenHideRightPanel,
         syncMedia,
-        gVideoElement,
+        isMobile,
     } from "./common";
     import BottomPanel from "./BottomPanel.svelte";
     import LeftPanel from "./LeftPanel.svelte";
@@ -18,7 +19,8 @@
     import HelpPanel from "./HelpPanel.svelte";
     import Player from "./Player.svelte";
 
-    // let body: HTMLElement;
+    import LeftPanelContent from "./LeftPanelContent.svelte";
+
     let mediaElems: HTMLMediaElement[];
     let cheerElem: HTMLAudioElement;
     let isPaused = false;
@@ -151,7 +153,7 @@
     }
 
     onMount(() => {
-        cheerElem.volume = 0.2;
+        if (cheerElem) cheerElem.volume = 0.2;
     });
 </script>
 
@@ -161,24 +163,28 @@
     on:fullscreenchange={showCursor}
 />
 
-<BottomPanel />
-<LeftPanel />
-<RightPanel />
-<HelpPanel />
-<div
-    on:click={(e) => {
-        if (e.button == 0) togglePause();
-    }}
->
-    <Player bind:mediaElems />
-</div>
-<audio bind:this={cheerElem} src="/cheer.mp3" type="audio/mp3" />
+{#if isMobile}
+    <LeftPanelContent />
+{:else}
+    <BottomPanel />
+    <LeftPanel />
+    <RightPanel />
+    <HelpPanel />
+    <div
+        on:click={(e) => {
+            if (e.button == 0) togglePause();
+        }}
+    >
+        <Player bind:mediaElems />
+    </div>
+    <audio bind:this={cheerElem} src="/cheer.mp3" type="audio/mp3" />
+{/if}
 
 <style lang="scss">
     :global(body) {
         overflow-x: hidden;
         overflow-y: hidden;
-        background-color: floralwhite;
+        background-color: FloralWhite;
     }
     :global(ul) {
         list-style-type: none;

@@ -129,7 +129,7 @@
                 background-color: AliceBlue;
             }
             &.played-item {
-                color: darkgray;
+                color: DarkGray;
             }
             & div.playlist-item {
                 display: flex;
@@ -148,7 +148,7 @@
                     border-radius: 5px;
                     width: 20px;
                     text-align: center;
-                    color: white;
+                    color: White;
                     &:hover {
                         font-weight: bold;
                     }
@@ -159,9 +159,9 @@
                 & div.prioritize-button,
                 & div.again-button {
                     font-size: 12pt;
-                    background-color: lightgreen;
+                    background-color: LightGreen;
                     &:hover {
-                        background-color: green;
+                        background-color: Green;
                     }
                 }
                 & div.priority-button span {
@@ -175,9 +175,9 @@
                     & span {
                         margin-top: 5px;
                     }
-                    background-color: salmon;
+                    background-color: Salmon;
                     &:hover {
-                        background-color: red;
+                        background-color: Red;
                     }
                 }
                 & div.no-button {

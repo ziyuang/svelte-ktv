@@ -3,9 +3,9 @@
     import {
         Singer,
         gPlaylist,
-        gCurrentPlayingIndex,
-        gVideoElement,
         showThenHideRightPanel,
+        isMobile,
+        desktopOrMobile,
     } from "./common";
 
     export let singer: Singer;
@@ -14,10 +14,12 @@
     function toggleExpansion() {
         expanded = !expanded;
     }
+
+    const ws = new WebSocket("localhost");
 </script>
 
 <!-- svelte-ignore missing-declaration -->
-<div class="singer">
+<div class={$desktopOrMobile}>
     <div class="singer-name" on:click={toggleExpansion}>
         <div class="singer-name-icon">
             {#if expanded}
@@ -27,9 +29,13 @@
         <div class="singer-name-text">{singer.name}</div>
     </div>
     {#if expanded}
-        <ul transition:slide={{ duration: 50 * singer.songs.length }}>
+        <ul
+            transition:slide={{ duration: 50 * singer.songs.length }}
+            class={$desktopOrMobile}
+        >
             {#each singer.songs as song}
                 <li
+                    class={$desktopOrMobile}
                     on:click={() => {
                         gPlaylist.set([
                             ...$gPlaylist,
@@ -39,14 +45,6 @@
                                 song: song,
                             },
                         ]);
-                        if ($gPlaylist.length == 1) {
-                            gCurrentPlayingIndex.set(0);
-                        } else if (
-                            $gVideoElement.ended &&
-                            $gCurrentPlayingIndex == $gPlaylist.length - 2
-                        ) {
-                            gCurrentPlayingIndex.set($gPlaylist.length - 1);
-                        }
                         showThenHideRightPanel();
                     }}
                 >
@@ -62,34 +60,67 @@
     div.song-name {
         cursor: pointer;
         display: flex;
-        &:hover {
-            background-color: AliceBlue;
+        user-select: none;
+    }
+
+    div.singer-name {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    div.desktop {
+        margin-left: 10px;
+        margin-right: 10px;
+        & div.singer-name {
+            width: 90%;
+            &:hover {
+                background-color: AliceBlue;
+            }
+            & div.singer-name-icon {
+                width: 30px;
+            }
+            & div.song-name:active {
+                background-color: Aqua;
+            }
         }
     }
-
-    div.song-name:active {
-        background-color: Aqua;
-    }
-
-    div.singer {
-        width: 90%;
-        margin-top: 15px;
-        margin-left: 10px;
-        margin-bottom: 15px;
-        margin-right: 10px;
-        div.singer-name-icon {
-            width: 30px;
+    div.mobile {
+        & div.singer-name {
+            font-size: 25pt;
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+            & div.singer-name-icon {
+                display: none;
+            }
+            & div.song-name:active {
+                background-color: AliceBlue;
+            }
         }
     }
 
     ul {
         margin-top: 0px;
-        li {
+        &.mobile {
+            padding-left: 20px;
+        }
+        & li {
             margin-top: 5px;
             margin-bottom: 5px;
+        }
+        & li.desktop {
             margin-left: 0px;
             padding-left: 5px;
             border-left: 1px solid DarkGray;
+        }
+        & li.mobile {
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+            & div.song-name {
+                font-size: 18pt;
+                color: DimGray;
+            }
         }
     }
 </style>

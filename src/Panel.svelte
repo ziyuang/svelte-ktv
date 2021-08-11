@@ -194,7 +194,7 @@
                 border-radius: 5px;
                 overflow-y: auto;
                 display: table;
-                background-color: floralwhite !important;`;
+                background-color: FloralWhite !important;`;
             break;
     }
 
@@ -233,8 +233,8 @@
         z-index: 100;
         & div.panel {
             font-family: sans-serif;
-            background-color: white;
-            border: 1px solid gray;
+            background-color: White;
+            border: 1px solid Gray;
             &::-webkit-scrollbar {
                 width: 12px;
             }

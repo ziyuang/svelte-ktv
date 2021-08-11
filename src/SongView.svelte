@@ -2,11 +2,11 @@
     import { derived } from "svelte/store";
     import {
         Singer,
-        gSearchString,
         PlayListItem,
+        gSearchString,
         gPlaylist,
-        gCurrentPlayingIndex,
         showThenHideRightPanel,
+        desktopOrMobile,
     } from "./common";
 
     export let repo: Singer[];
@@ -38,30 +38,33 @@
     });
 </script>
 
-<ul>
-    {#each $filteredSongs as songInfo (songInfo[0])}
-        <li
-            on:click={() => {
-                gPlaylist.set([
-                    ...$gPlaylist,
-                    {
-                        id: songInfo[1].id,
-                        singer: songInfo[1].singer,
-                        song: songInfo[1].song,
-                    },
-                ]);
-                if ($gPlaylist.length == 1) {
-                    gCurrentPlayingIndex.set(0);
-                }
-                showThenHideRightPanel();
-            }}
-        >
-            {songInfo[0]}
-        </li>
-    {/each}
-</ul>
+<div>
+    <ul>
+        {#each $filteredSongs as songInfo (songInfo[0])}
+            <li
+                class={$desktopOrMobile}
+                on:click={() => {
+                    gPlaylist.set([
+                        ...$gPlaylist,
+                        {
+                            id: songInfo[1].id,
+                            singer: songInfo[1].singer,
+                            song: songInfo[1].song,
+                        },
+                    ]);
+                    showThenHideRightPanel();
+                }}
+            >
+                {songInfo[0]}
+            </li>
+        {/each}
+    </ul>
+</div>
 
 <style lang="scss">
+    div {
+        top: 30px;
+    }
     ul {
         margin-left: -20px;
         & li {
@@ -70,13 +73,21 @@
             padding-top: 3px;
             padding-bottom: 3px;
             padding-left: 12px;
-            cursor: pointer;
             width: 80%;
-            &:hover {
-                background-color: AliceBlue;
+            cursor: pointer;
+            &.desktop {
+                &:hover {
+                    background-color: AliceBlue;
+                }
+                &:active {
+                    background-color: Aqua;
+                }
             }
-            &:active {
-                background-color: Aqua;
+            &.mobile {
+                font-size: 18pt;
+                &:active {
+                    background-color: AliceBlue;
+                }
             }
         }
     }

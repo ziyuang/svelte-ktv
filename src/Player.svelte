@@ -52,6 +52,18 @@
             gMediaSource.set($gPlaylist[idx].song.source);
     });
 
+    gPlaylist.subscribe((newList) => {
+        if (newList.length == 1) {
+            gCurrentPlayingIndex.set(0);
+        } else if (
+            videoElem &&
+            videoElem.ended &&
+            $gCurrentPlayingIndex == newList.length - 2
+        ) {
+            gCurrentPlayingIndex.set(newList.length - 1);
+        }
+    });
+
     function playNext() {
         gCurrentPlayingIndex.set(
             Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length - 1)

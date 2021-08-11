@@ -5,9 +5,6 @@
     export let repo: Singer[];
 </script>
 
-<div>
-    {#each repo as singer}
-        <SingerView {singer} />
-    {/each}
-</div>
-
+{#each repo as singer}
+    <SingerView {singer} />
+{/each}

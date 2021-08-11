@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as ip from "ip";
 import { strict as assert } from "assert";
 
-import { Singer, Song, MediaSource } from "./common";
+import { Singer, Song, MediaSource, PlayListItem } from "./common";
 
 interface SongPath {
     [song: string]: MediaSource;
@@ -72,6 +72,12 @@ app.get("/videos", (req: express.Request, res: express.Response) =>
     res.send(createRepo("videos"))
 );
 app.use(express.static("."));
+app.ws("/", function (ws, req: express.Request) {
+    // OK to boardcast
+    ws.on("message", function (item: PlayListItem) {
+        ws.send(item);
+    });
+});
 
 const PORT = 80;
 const ADDR = ip.address();

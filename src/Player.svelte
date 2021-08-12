@@ -67,9 +67,9 @@
     });
 
     function playNext() {
-        gCurrentPlayingIndex.set(
-            Math.min($gCurrentPlayingIndex + 1, $gPlaylist.length - 1)
-        );
+        if ($gCurrentPlayingIndex < $gPlaylist.length - 1) {
+            gCurrentPlayingIndex.set($gCurrentPlayingIndex + 1);
+        }
         showThenHideRightPanel();
     }
 

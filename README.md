@@ -1,17 +1,17 @@
 # Screenshots
-## Desktop
+## Desktop (main interface)
 ![screenshot1](screenshots/screenshot1.png)
 ![screenshot2](screenshots/screenshot2.png)
-## Mobile (for song-adding only)
+## Mobile (song-adding only)
 ![mobile_screenshot](screenshots/mobile_screenshot.jpg)
 
 # Build & Run
 * Build: `yarn install && npx webpack build`
-* Launch the server: `cd dist && node server.js`
-  * The video folder `videos` needs to be present under `dist`
-* Connect to the server
-  * PC: `http://localhost`
-  * Mobile devices: `http://${IP_OF_YOUR_PC}`
+* Server: `cd dist && node server.js`
+  * Before launching, put your video folder `videos` under `dist`
+* Clients
+  * Desktop: `http://localhost`
+  * Mobile: `http://${IP_OF_YOUR_DESKTOP}`
 
 # File name format of the media files
 The server requires the names of the media files in a certain format (see `src/server.ts`). For example if you have a `{stem}.mpg`, you can generate the tracks with

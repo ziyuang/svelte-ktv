@@ -64,6 +64,7 @@
         ) {
             gCurrentPlayingIndex.set(newList.length - 1);
         }
+        // console.log("local", $gPlaylist, $gCurrentPlayingIndex);
     });
 
     function playNext() {
@@ -78,6 +79,7 @@
         const playListItem: PlayListItem = JSON.parse(e.data);
         gPlaylist.set([...$gPlaylist, playListItem]);
         showThenHideRightPanel();
+        // console.log("remote", $gPlaylist, $gCurrentPlayingIndex);
     };
 </script>
 
@@ -93,6 +95,7 @@
             allReady.set(videoReady && audioReady[0] && audioReady[1]);
         }
     }}
+    on:play={() => $gVideoElement.focus()}
     on:ended={playNext}
 />
 

@@ -103,7 +103,7 @@
     }
 
     ul {
-        margin-top: 0px;
+        margin-top: 10px;
         &.mobile {
             padding-left: 20px;
         }

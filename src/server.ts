@@ -14,7 +14,7 @@ interface Repo {
 }
 
 function createRepo(root: string): Singer[] {
-    const regex = /^(.+?)-(.+?)(?:\[|\()/;
+    const regex = /^(.+?)-(.+?)(?:\[|\(|\.)/;
     let repo: Repo = {};
     for (const file of fs.readdirSync(root, { withFileTypes: true })) {
         if (file.isFile() && file.name.endsWith(".mp4")) {

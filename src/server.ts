@@ -1,11 +1,10 @@
 import express from "express";
-import wsServer from  "express-ws"
+import expressWs from "express-ws";
 import * as fs from "fs";
 import * as ip from "ip";
 import { strict as assert } from "assert";
 
 import { Singer, Song, MediaSource } from "./common";
-import expressWs from "express-ws";
 
 interface SongPath {
     [song: string]: MediaSource;

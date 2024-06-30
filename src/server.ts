@@ -1,9 +1,11 @@
 import express from "express";
+import wsServer from  "express-ws"
 import * as fs from "fs";
 import * as ip from "ip";
 import { strict as assert } from "assert";
 
 import { Singer, Song, MediaSource } from "./common";
+import expressWs from "express-ws";
 
 interface SongPath {
     [song: string]: MediaSource;
@@ -22,7 +24,7 @@ function createRepo(root: string): Singer[] {
             if (m) {
                 let singers = m[1].split("、");
                 for (const singer of singers) {
-                    let song = m[2];
+                    let song: string = m[2];
                     if (!(singer in repo)) {
                         repo[singer] = {};
                     }
@@ -64,7 +66,7 @@ function createRepo(root: string): Singer[] {
 }
 
 const app = express();
-const expressWs = require("express-ws")(app);
+const wsServer = expressWs(app);
 app.get("/", function (req: express.Request, res: express.Response) {
     res.sendFile("index.html", { root: "." });
 });
@@ -73,8 +75,8 @@ app.get("/videos", (req: express.Request, res: express.Response) =>
 );
 app.use(express.static("."));
 
-const wss = expressWs.getWss();
-app.ws("/", function (ws, req: express.Request) {
+const wss = wsServer.getWss();
+wsServer.app.ws("/", function (ws, req: express.Request) {
     ws.on("message", function (msg: string) {
         wss.clients.forEach(function (client) {
             client.send(msg);
